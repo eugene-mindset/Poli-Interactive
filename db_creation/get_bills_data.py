@@ -154,7 +154,6 @@ subject_file.close()
 print('Subject table filled')
 
 # Enter data into Member table and Role table
-already_in = set()
 for congress in congresses:
     for chamber in ['house', 'senate']:
         json_file = open(f'./congress_members/{congress}-{chamber}.json', 'r')
@@ -162,13 +161,10 @@ for congress in congresses:
         members = json_data['results'][0]['members']
         for member in tqdm(members, desc=f'Congress: {congress} Chamber: {chamber}', colour='blue'):
             member_data = (member['id'], member['first_name'], member['middle_name'], member['last_name'], member['date_of_birth'], member['gender'])
-            if member_data[0] not in already_in:
-                print(member_data[0])
-                cur.execute('INSERT INTO Member VALUES (?,?,?,?,?,?)', member_data)
-                already_in.add(member_data[0])
+            cur.execute('INSERT OR REPLACE INTO Member VALUES (?,?,?,?,?,?)', member_data)
 
             role_data = (member['id'], congress, chamber, member['party'], member['state'], (member['district'] if chamber == 'house' else None))
-            cur.execute('INSERT INTO Role VALUES (?,?,?,?,?,?)', role_data)
+            cur.execute('INSERT OR REPLACE INTO Role VALUES (?,?,?,?,?,?)', role_data)
 print('Member and Role table filled')
 
 con.commit()
@@ -177,16 +173,16 @@ con.commit()
 # bill_errors = []
 # bill_xmls = bill_dir.glob('**/*.xml')
 # for bill_xml in bill_xmls:
-#     print(f'Beginning to parse {bill_xml.name}')
+#     print(f'Parsing {bill_xml.name}')
 #     try:
 #         xml_root = ET.parse(bill_xml).getroot()
+#         bill_elem = xml_root.find('bill')
 #     except:
-#         print(f'Error parsing root of {bill_xml.name}')
+#         print(f'Error getting to bill element of {bill_xml.name}')
 #         bill_errors.append(str(bill_xml))
 #         continue
 
-#     bill_elem = xml_root.find('bill')
-
+    
 
 con.commit()
 con.close()
