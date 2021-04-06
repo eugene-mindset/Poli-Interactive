@@ -76,7 +76,9 @@ cur.execute('''CREATE TABLE IF NOT EXISTS Bill (
     congress TEXT NOT NULL,
     title TEXT NOT NULL,
     date_intro TEXT NOT NULL,
-    area TEXT NOT NULL,
+    area TEXT,
+    enacted TEXT NOT NULL,
+    vetoed TEXT NOT NULL,
     PRIMARY KEY (bill_num, congress),
     FOREIGN KEY (congress)
         REFERENCES Congress (congress)
@@ -181,8 +183,12 @@ for bill_xml in bill_xmls:
         bill_title = bill_elem.findtext('title')
         bill_date = bill_elem.findtext('introducedDate')
         bill_area = bill_elem.find('policyArea').findtext('name')
-        bill_data = (bill_num, bill_congress, bill_title, bill_date, bill_area)
-        cur.execute('INSERT INTO Bill VALUES (?,?,?,?,?)', bill_data)
+        bill_actions = bill_elem.find('actions')
+        action_codes = [e.findtext('actionCode') for e in bill_actions]
+        bill_enacted = 'Yes' if ('36000' in action_codes or '41000' in action_codes) else 'No'
+        bill_vetoed = 'Yes' if ('31000' in action_codes) else 'No'
+        bill_data = (bill_num, bill_congress, bill_title, bill_date, bill_area, bill_enacted, bill_vetoed)
+        cur.execute('INSERT INTO Bill VALUES (?,?,?,?,?,?,?)', bill_data)
 
         bill_subjects = [e.findtext('name') for e in bill_elem.find('subjects').find('billSubjects').find('legislativeSubjects').findall('item')]
         for subject in bill_subjects:
