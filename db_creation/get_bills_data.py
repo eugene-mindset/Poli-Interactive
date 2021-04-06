@@ -4,6 +4,7 @@ import requests
 import sqlite3
 import xml.etree.ElementTree as ET
 import zipfile
+from tqdm import tqdm
 
 # Download bill XML files
 congresses = ["111", "112", "113", "114", "115",  "116", "117"]
@@ -13,7 +14,7 @@ base_url = "https://www.govinfo.gov/bulkdata/BILLSTATUS/"
 bill_dir = Path("Bills")
 bill_dir.mkdir()
 
-for congress in congresses:
+for congress in tqdm(congresses, colour='blue', desc='Downloading bill information'):
     congress_dir = bill_dir / Path(congress)
     congress_dir.mkdir()
     print(f"Downloading files for Congress {congress}")
@@ -159,11 +160,10 @@ for congress in congresses:
         json_file = open(f'./congress_members/{congress}-{chamber}.json', 'r')
         json_data = json.load(json_file)
         members = json_data['results'][0]['members']
-        for member in members:
+        for member in tqdm(members, desc=f'Congress: {congress} Chamber: {chamber}', colour='blue'):
             member_data = (member['id'], member['first_name'], member['middle_name'], member['last_name'], member['date_of_birth'], member['gender'])
-            if member_data[0] in already_in:
-                continue
-            else:
+            if member_data[0] not in already_in:
+                print(member_data[0])
                 cur.execute('INSERT INTO Member VALUES (?,?,?,?,?,?)', member_data)
                 already_in.add(member_data[0])
 
