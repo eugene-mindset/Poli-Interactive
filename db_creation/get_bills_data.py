@@ -170,19 +170,39 @@ print('Member and Role table filled')
 con.commit()
 
 # Enter Bill data
-# bill_errors = []
-# bill_xmls = bill_dir.glob('**/*.xml')
-# for bill_xml in bill_xmls:
-#     print(f'Parsing {bill_xml.name}')
-#     try:
-#         xml_root = ET.parse(bill_xml).getroot()
-#         bill_elem = xml_root.find('bill')
-#     except:
-#         print(f'Error getting to bill element of {bill_xml.name}')
-#         bill_errors.append(str(bill_xml))
-#         continue
+bill_xmls = bill_dir.glob('**/*.xml')
+for bill_xml in bill_xmls:
+    try:
+        xml_root = ET.parse(bill_xml).getroot()
+        bill_elem = xml_root.find('bill')
 
-    
+        bill_num = bill_elem.findtext('billType').lower() + bill_elem.findtext('billNumber')
+        bill_congress = bill_elem.findtext('congress')
+        bill_title = bill_elem.findtext('title')
+        bill_date = bill_elem.findtext('introducedDate')
+        bill_area = bill_elem.find('policyArea').findtext('name')
+        bill_data = (bill_num, bill_congress, bill_title, bill_date, bill_area)
+        cur.execute('INSERT INTO Bill VALUES (?,?,?,?,?)', bill_data)
+
+        bill_subjects = [e.findtext('name') for e in bill_elem.find('subjects').find('billSubjects').find('legislativeSubjects').findall('item')]
+        for subject in bill_subjects:
+            cur.execute('INSERT INTO Bill_Subject VALUES (?,?,?)', (bill_num, bill_congress, subject))
+
+        bill_sponsor = bill_elem.find('sponsors').find('item')
+        if bill_sponsor:
+            bill_sponsor = bill_sponsor.findtext('bioguideId')
+            cur.execute('INSERT INTO Sponsor VALUES (?,?,?)', (bill_sponsor, bill_num, bill_congress))
+
+        cosponsor_elems = bill_elem.find('cosponsors').findall('item')
+        bill_cosponsors = [e.findtext('bioguideId') for e in cosponsor_elems if not e.findtext('sponsorshipWithdrawnDate')]
+        for cosponsor in bill_cosponsors:
+            cur.execute('INSERT INTO Cosponsor VALUES (?,?,?)', (cosponsor, bill_num, bill_congress))
+    except:
+        print(f'Error parsing {bill_xml.name}')
+        print(sys.exc_info()[0])
+        print()
+        continue
+print('Bill, Bill_Subject, Sponsor, and Cosponsor tables filled')
 
 con.commit()
 con.close()
