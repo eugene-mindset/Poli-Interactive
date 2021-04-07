@@ -1,3 +1,5 @@
+Anderson Adon aadon1, Eugene Asare easare3
+
 Our data came from XML files from https://www.govinfo.gov/bulkdata, from ProPublica's Congress API 
 https://projects.propublica.org/api-docs/congress-api/, and from https://www.congress.gov/. The 
 Congress table was made manually since it's small. The Area and Subject tables were made manually, 
