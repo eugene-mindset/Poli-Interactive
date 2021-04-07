@@ -13,4 +13,4 @@ Our data had to be pulled from APIs which return results that weren't table-like
 
 ## Concerns
 
-None. we gucci.
+None.
