@@ -5,6 +5,7 @@ import sqlite3
 import sys
 import xml.etree.ElementTree as ET
 import zipfile
+from tqdm import tqdm
 
 # Download bill XML files
 congresses = ["115",  "116"]
@@ -14,7 +15,7 @@ base_url = "https://www.govinfo.gov/bulkdata/BILLSTATUS/"
 bill_dir = Path("Bills")
 bill_dir.mkdir()
 
-for congress in congresses:
+for congress in tqdm(congresses):
     congress_dir = bill_dir / Path(congress)
     congress_dir.mkdir()
     #print(f"Downloading files for Congress {congress}")
