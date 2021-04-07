@@ -4,10 +4,11 @@ import requests
 import sqlite3
 import xml.etree.ElementTree as ET
 import zipfile
+import sys
 from tqdm import tqdm
 
 # Download bill XML files
-congresses = ["111", "112", "113", "114", "115",  "116", "117"]
+congresses = ["115", "116"]
 bill_types = ["hr", "s", "hjres", "sjres"]
 base_url = "https://www.govinfo.gov/bulkdata/BILLSTATUS/"
 
@@ -17,7 +18,7 @@ bill_dir.mkdir()
 for congress in tqdm(congresses, colour='blue', desc='Downloading bill information'):
     congress_dir = bill_dir / Path(congress)
     congress_dir.mkdir()
-    print(f"Downloading files for Congress {congress}")
+    #print(f"Downloading files for Congress {congress}")
 
     for bill_type in bill_types:
         zip_url = f"{base_url}{congress}/{bill_type}/BILLSTATUS-{congress}-{bill_type}.zip"
@@ -25,12 +26,12 @@ for congress in tqdm(congresses, colour='blue', desc='Downloading bill informati
         r = requests.get(zip_url)
         with open(zip_path, 'wb') as f:
             f.write(r.content)
-        print(f"Downloaded {zip_path.name}")
+        #print(f"Downloaded {zip_path.name}")
 
         extract_dir = congress_dir / Path(f"{congress}-{bill_type}")
         with zipfile.ZipFile(zip_path, 'r') as bills_zip:
             bills_zip.extractall(extract_dir)
-        print(f"Extracted to {str(extract_dir)}")
+        #print(f"Extracted to {str(extract_dir)}")
 
 
 # Parse XML and create SQLite tables
@@ -105,7 +106,7 @@ cur.execute('''CREATE TABLE IF NOT EXISTS Bill_Subject (
 cur.execute('''CREATE TABLE IF NOT EXISTS Sponsor (
     member_id TEXT NOT NULL,
     bill_num TEXT NOT NULL,
-    congress TEXT NOT NULL, 
+    congress TEXT NOT NULL,
     PRIMARY KEY (member_id, bill_num, congress),
     FOREIGN KEY (member_id)
         REFERENCES Member (member_id)
@@ -171,7 +172,7 @@ con.commit()
 
 # Enter Bill data
 bill_xmls = bill_dir.glob('**/*.xml')
-for bill_xml in bill_xmls:
+for bill_xml in tqdm(bill_xmls, colour='blue', desc='Bill processing'):
     try:
         xml_root = ET.parse(bill_xml).getroot()
         bill_elem = xml_root.find('bill')
