@@ -5,7 +5,10 @@ https://projects.propublica.org/api-docs/congress-api/, and from https://www.con
 Congress table was made manually since it's small. The Area and Subject tables were made manually, 
 copy pasting from Congress's website (https://www.congress.gov/help/field-values/legislative-subject-terms, 
 https://www.congress.gov/help/field-values/policy-area). Member and Role data was taken from ProPublica's API. 
-The rest of the tables' data was retrieved from congress's bulk data store. We made a python script to 
-parse all this data and insert it into a SQL database, then export those SQL tables to text files (we found this to be easier).
+The Bill, Bill_Subject, Sponsor, and Cosponsor tables data was retrieved from congress's bulk data store. 
+The Vote table's data was retrieved semi-manually by verifying the proper vote for each bill
+that ever received one since there was no clear way to programmatically get the correct vote for a bill.
+We made python scripts to parse all this data and insert it into a SQL database, then export
+those SQL tables to text files (we found this to be easier).
 
 For the script we used to get the database, it is located at: https://github.com/eugene-mindset/Poli-Interactive/blob/main/db_creation/get_bills_data.py.
