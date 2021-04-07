@@ -1,3 +1,4 @@
+-- Anderson Adon aadon1, Eugene Asare easare3
 
 CREATE TABLE IF NOT EXISTS Congress (
     congress  VARCHAR(3) NOT NULL,
@@ -195,6 +196,7 @@ FIELDS
   ENCLOSED BY '"'
   LINES TERMINATED BY '\n'
 IGNORE 1 ROWS (member_id,bill_num,congress);
+<<<<<<< HEAD
 
 LOAD DATA LOCAL INFILE 'C:/Users/eugen/Documents/Poli-Interactive/db_creation/db_csvs/small/vote.csv'
 INTO TABLE Vote
@@ -203,3 +205,5 @@ FIELDS
     ENCLOSED BY '"'
     LINES TERMINATED BY '\n'
 IGNORE 1 ROWS (member_id,bill_num,congress,position);
+=======
+>>>>>>> d18f3bf7f976b5ffd5ebcde1337af7f01857a83d

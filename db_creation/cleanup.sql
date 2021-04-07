@@ -1,3 +1,4 @@
+-- Anderson Adon aadon1, Eugene Asare easare3
 
 DROP TABLE IF EXISTS Bill_Subject;
 DROP TABLE IF EXISTS Cosponsor;

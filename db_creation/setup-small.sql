@@ -1,3 +1,4 @@
+-- Anderson Adon aadon1, Eugene Asare easare3
 
 CREATE TABLE IF NOT EXISTS Congress (
     congress  VARCHAR(3) NOT NULL,
@@ -202,4 +203,8 @@ FIELDS
     TERMINATED BY '||'
     ENCLOSED BY '"'
     LINES TERMINATED BY '\n'
+<<<<<<< HEAD
 IGNORE 1 ROWS (member_id,bill_num,congress,position);
+=======
+IGNORE 1 ROWS (member_id,bill_num,congress);
+>>>>>>> d18f3bf7f976b5ffd5ebcde1337af7f01857a83d
