@@ -1,4 +1,4 @@
 We had to download XMLs and JSONs files through html requests, which we then parsed through. The scripts we wrote were in python.
 The parsed data was then added to a SQL database which we then exported to CSVs for submission.
 
-For the script we used to get the database, it is located: https://github.com/eugene-mindset/Poli-Interactive/blob/main/db_creation/get_bills_data.py.
+For the script we used to get the database, it is located at: https://github.com/eugene-mindset/Poli-Interactive/blob/main/db_creation/get_bills_data.py.
