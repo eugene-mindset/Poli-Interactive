@@ -1,4 +1,3 @@
-We had to download XMLs and JSONs files through html requests, which we then parsed through. The scripts we wrote were in python.
-The parsed data was then added to a SQL database which we then exported to CSVs for submission.
+Our data came from XML files from https://www.govinfo.gov/bulkdata, from ProPublica's Congress API https://projects.propublica.org/api-docs/congress-api/, and from https://www.congress.gov/. The Congress table was made manually since it's small. The Area and Subject tables were made manually, copy pasting from Congress's website (https://www.congress.gov/help/field-values/legislative-subject-terms, https://www.congress.gov/help/field-values/policy-area). Member and Role data was taken from ProPublica's API. The rest of the tables' data was retrieved from congress's bulk data store. We made a python script to parse all this data and insert it into a SQL database, then export those SQL tables to text files (we found this to be easier).
 
 For the script we used to get the database, it is located at: https://github.com/eugene-mindset/Poli-Interactive/blob/main/db_creation/get_bills_data.py.
