@@ -2,20 +2,19 @@ import json
 from pathlib import Path
 import requests
 import sqlite3
+import sys
 import xml.etree.ElementTree as ET
 import zipfile
-import sys
-from tqdm import tqdm
 
 # Download bill XML files
-congresses = ["115", "116"]
+congresses = ["115",  "116"]
 bill_types = ["hr", "s", "hjres", "sjres"]
 base_url = "https://www.govinfo.gov/bulkdata/BILLSTATUS/"
 
 bill_dir = Path("Bills")
 bill_dir.mkdir()
 
-for congress in tqdm(congresses, colour='blue', desc='Downloading bill information'):
+for congress in congresses:
     congress_dir = bill_dir / Path(congress)
     congress_dir.mkdir()
     #print(f"Downloading files for Congress {congress}")
@@ -77,7 +76,9 @@ cur.execute('''CREATE TABLE IF NOT EXISTS Bill (
     congress TEXT NOT NULL,
     title TEXT NOT NULL,
     date_intro TEXT NOT NULL,
-    area TEXT NOT NULL,
+    area TEXT,
+    enacted TEXT NOT NULL,
+    vetoed TEXT NOT NULL,
     PRIMARY KEY (bill_num, congress),
     FOREIGN KEY (congress)
         REFERENCES Congress (congress)
@@ -160,13 +161,13 @@ for congress in congresses:
         json_file = open(f'./congress_members/{congress}-{chamber}.json', 'r')
         json_data = json.load(json_file)
         members = json_data['results'][0]['members']
-        for member in tqdm(members, desc=f'Congress: {congress} Chamber: {chamber}', colour='blue'):
+        for member in members:
             member_data = (member['id'], member['first_name'], member['middle_name'], member['last_name'], member['date_of_birth'], member['gender'])
             cur.execute('INSERT OR REPLACE INTO Member VALUES (?,?,?,?,?,?)', member_data)
 
             role_data = (member['id'], congress, chamber, member['party'], member['state'], (member['district'] if chamber == 'house' else None))
             cur.execute('INSERT OR REPLACE INTO Role VALUES (?,?,?,?,?,?)', role_data)
-print('Member and Role table filled')
+print('Member and Role tables filled')
 
 con.commit()
 
@@ -182,8 +183,12 @@ for bill_xml in tqdm(bill_xmls, colour='blue', desc='Bill processing'):
         bill_title = bill_elem.findtext('title')
         bill_date = bill_elem.findtext('introducedDate')
         bill_area = bill_elem.find('policyArea').findtext('name')
-        bill_data = (bill_num, bill_congress, bill_title, bill_date, bill_area)
-        cur.execute('INSERT INTO Bill VALUES (?,?,?,?,?)', bill_data)
+        bill_actions = bill_elem.find('actions')
+        action_codes = [e.findtext('actionCode') for e in bill_actions]
+        bill_enacted = 'Yes' if ('36000' in action_codes or '41000' in action_codes) else 'No'
+        bill_vetoed = 'Yes' if ('31000' in action_codes) else 'No'
+        bill_data = (bill_num, bill_congress, bill_title, bill_date, bill_area, bill_enacted, bill_vetoed)
+        cur.execute('INSERT INTO Bill VALUES (?,?,?,?,?,?,?)', bill_data)
 
         bill_subjects = [e.findtext('name') for e in bill_elem.find('subjects').find('billSubjects').find('legislativeSubjects').findall('item')]
         for subject in bill_subjects:
