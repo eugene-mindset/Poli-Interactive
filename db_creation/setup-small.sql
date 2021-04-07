@@ -1,3 +1,5 @@
+-- Anderson Adon aadon1, Eugene Asare easare3
+
 CREATE TABLE IF NOT EXISTS Congress (
     congress  VARCHAR(3) NOT NULL,
     startDate DATE NOT NULL,
