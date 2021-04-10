@@ -1,5 +1,5 @@
 WITH SponsorCount AS (
-    SELECT member_id, congress, count(member_id) as num_bills
+    SELECT member_id, congress, COUNT(member_id) as num_bills
     FROM Sponsor
     GROUP BY member_id),
 HouseCount AS (
