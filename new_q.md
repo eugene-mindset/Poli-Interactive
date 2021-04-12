@@ -5,9 +5,9 @@
 3. ~~What senator(s) has the most sponsored bills?~~
 4. ~~How many times has a member of Congress agreed to a bill that was proposed by a different party?~~
 5. What state has had the most members of congress propose a bill?
-6. How many times has a vote been entirely partisan?
-7. What state(s) has the highest total of bills proposed by their senators and representatives?
-8. What state(s) has the highest total of bills passed by their senators and representatives?
+6. ~~How many times has a vote been entirely partisan?~~
+7. ~~What state(s) has the highest total of bills proposed by their senators and representatives?~~
+8. ~~What state(s) has the highest total of bills passed by their senators and representatives?~~
 9. What is the average age of the current Congress? What is the median?
 10. What is the mode of birthdays in Congress?
 11. What bill area appears often in passed bills?
