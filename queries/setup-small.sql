@@ -198,3 +198,7 @@ IGNORE 1 ROWS (member_id,bill_num,congress,position);
 UPDATE Role
 SET party = 'I'
 WHERE party LIKE 'ID';
+
+UPDATE Vote
+SET position = 'Not Voting'
+WHERE position LIKE 'Present';
