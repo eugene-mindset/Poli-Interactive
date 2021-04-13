@@ -82,7 +82,7 @@ CREATE TABLE IF NOT EXISTS Bill_Subject (
 CREATE TABLE IF NOT EXISTS Sponsor (
     member_id VARCHAR(10) NOT NULL,
     bill_num  VARCHAR(15) NOT NULL,
-    congress  VARCHAR(5) NOT NULL, 
+    congress  VARCHAR(5) NOT NULL,
     PRIMARY KEY (member_id, bill_num, congress),
     FOREIGN KEY (member_id)
         REFERENCES Member (member_id)

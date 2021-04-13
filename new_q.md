@@ -13,5 +13,5 @@
 11. What bill area appears often in passed bills?
 12. ~~For each bill, what was the majority party decision?~~
 13. Which party had more sponsored bills that passed?
-14. What senator has voted against the majority of their party the most times?
+14. ~~What senator has voted against the majority of their party the most times?~~
 15. What state had the highest percentage of their seats change by a different member between the 115th to 116th congress?
