@@ -1,12 +1,19 @@
-WITH SponsorCount AS (
+-- Which representative(s) has sponsored the most bills?
+
+WITH SponsorCount AS
+(
     SELECT member_id, congress, count(member_id) as num_bills
     FROM Sponsor
-    GROUP BY member_id),
-HouseCount AS (
+    GROUP BY member_id
+),
+HouseCount AS
+(
     SELECT member_id, num_bills, party, state, district
     FROM SponsorCount JOIN Role USING(member_id, congress)
     WHERE chamber LIKE 'house'
-), MaxHouseCount AS (
+),
+MaxHouseCount AS
+(
     SELECT MAX(num_bills) as most_bills
     FROM HouseCount
 )

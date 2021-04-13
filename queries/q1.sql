@@ -1,5 +1,6 @@
 -- What bill(s) passed with the most amount of "Yes" votes in the senate,
 -- how many votes did it receive?
+
 SELECT * FROM
 (
     SELECT bill_num, congress, MAX(numYes) as numYes
