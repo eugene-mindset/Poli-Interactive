@@ -1,5 +1,5 @@
--- Are there any representatives who did not Sponsor or Cosponsor a bill?
-SELECT * FROM
-(SELECT * FROM Sponsor UNION SELECT * FROM Cosponsor) AS a
+-- Are there any representatives who did not Sponsor a bill?
+SELECT member_id, firstName, middleName, lastName, birthday, gender FROM
+Sponsor
 NATURAL RIGHT OUTER JOIN Member
 WHERE bill_num IS NULL
