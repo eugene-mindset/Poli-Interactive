@@ -2,7 +2,7 @@
 
 WITH SponsorCount AS
 (
-    SELECT member_id, congress, count(member_id) as num_bills
+    SELECT member_id, congress, COUNT(member_id) AS num_bills
     FROM Sponsor
     GROUP BY member_id
 ),
@@ -14,7 +14,7 @@ HouseCount AS
 ),
 MaxHouseCount AS
 (
-    SELECT MAX(num_bills) as most_bills
+    SELECT MAX(num_bills) AS most_bills
     FROM HouseCount
 )
 SELECT member_id, firstName, middleName, lastName, num_bills, party, state, district
