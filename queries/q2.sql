@@ -10,7 +10,7 @@ HouseCount AS
 (
     SELECT member_id, num_bills, party, state, district
     FROM SponsorCount JOIN Role USING(member_id, congress)
-    WHERE chamber LIKE 'house'
+    WHERE chamber = 'house'
 ),
 MaxHouseCount AS
 (

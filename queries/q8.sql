@@ -4,7 +4,7 @@ WITH SponsorByState AS
 (
     SELECT state, COUNT(bill_num) AS num_bill
     FROM (Sponsor JOIN Role USING (member_id, congress)) JOIN Bill USING (bill_num, congress)
-    WHERE enacted LIKE 'Yes'
+    WHERE enacted = 'Yes'
     GROUP BY state
 ),
 MaxState AS

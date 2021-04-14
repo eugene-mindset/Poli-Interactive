@@ -40,6 +40,6 @@ MaxDissentCount AS
     SELECT MAX(num) as max
     FROM DissentCount
 )
-SELECT *
-FROM DissentCount JOIN MaxDissentCount
+SELECT firstName, middleName, lastName, num
+FROM (DissentCount JOIN MaxDissentCount) JOIN Member USING (member_id)
 WHERE num = max;

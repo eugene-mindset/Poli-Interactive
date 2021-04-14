@@ -14,8 +14,7 @@ BipartisanBill AS
 (
     SELECT DISTINCT bill_num, congress, chamber
     FROM PartyBill JOIN PartyVote USING (bill_num, congress)
-    WHERE ((PartyBill.party != PartyVote.party AND position LIKE 'Yes') OR (PartyBill.party = PartyVote.party AND position LIKE 'No'))
-    AND PartyVote.party NOT LIKE 'I'
+    WHERE ((PartyBill.party != 'I'
 ),
 VotedBill AS
 (
