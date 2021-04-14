@@ -1,4 +1,5 @@
 -- What bill area appears most often in passed bills?
+
 WITH AreaCounts AS
 (
     SELECT a.area, COUNT(a.area) as occurences

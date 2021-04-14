@@ -1,4 +1,5 @@
 -- What state(s) has the highest total of bills proposed by their senators and representatives?
+
 WITH SponsorByState AS
 (
     SELECT state, COUNT(bill_num) AS num_bill

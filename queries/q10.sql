@@ -1,4 +1,5 @@
 -- What is the mode of birthdays in Congress?
+
 WITH BirthMonthDay AS
 (
     SELECT member_id, EXTRACT(MONTH FROM birthday) AS month, EXTRACT(DAY FROM birthday) AS day

@@ -1,4 +1,5 @@
 -- Which party has the most bills passed that were sponsored by a member of that party?
+
 WITH PassedBills AS
 (
     SELECT party, COUNT(party) AS numPassed

@@ -1,5 +1,6 @@
 -- List the states in descending order by what percentage of their house seats had a different
 -- member from the 115th congress to the 116th, and also show how many seats that state has in total.
+
 WITH ChangeCounts AS
 (
     SELECT a.state, COUNT(a.state) AS counts
