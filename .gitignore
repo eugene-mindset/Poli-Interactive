@@ -1,4 +1,3 @@
-
 ## REPO SPECIFIC
 
 temp/
@@ -6,6 +5,7 @@ db_creation/Bills/
 db_csvs/
 
 *.db
+*conf.php
 
 ## PYTHON
 
