@@ -125,70 +125,70 @@ CREATE TABLE IF NOT EXISTS Vote (
             ON UPDATE NO ACTION
 );
 
-LOAD DATA LOCAL INFILE 'C:/Users/eugen/Documents/Poli-Interactive/db_csvs/congress.csv'
+LOAD DATA LOCAL INFILE '/home/aadon1/public_html/Poli-Interactive/dbase_setup/data/congress.csv'
 INTO TABLE Congress
 FIELDS
     TERMINATED BY '||'
     LINES TERMINATED BY '\n'
 IGNORE 1 ROWS (congress,startDate,endDate);
 
-LOAD DATA LOCAL INFILE 'C:/Users/eugen/Documents/Poli-Interactive/db_csvs/member.csv'
+LOAD DATA LOCAL INFILE '/home/aadon1/public_html/Poli-Interactive/dbase_setup/data/member.csv'
 INTO TABLE Member
 FIELDS
   TERMINATED BY '||'
   LINES TERMINATED BY '\n'
 IGNORE 1 ROWS (member_id,firstName,middleName,lastName,birthday,gender);
 
-LOAD DATA LOCAL INFILE 'C:/Users/eugen/Documents/Poli-Interactive/db_csvs/role.csv'
+LOAD DATA LOCAL INFILE '/home/aadon1/public_html/Poli-Interactive/dbase_setup/data/role.csv'
 INTO TABLE Role
 FIELDS
   TERMINATED BY '||'
   LINES TERMINATED BY '\n'
 IGNORE 1 ROWS (member_id,congress,chamber,party,state,district);
 
-LOAD DATA LOCAL INFILE 'C:/Users/eugen/Documents/Poli-Interactive/db_csvs/area.csv'
+LOAD DATA LOCAL INFILE '/home/aadon1/public_html/Poli-Interactive/dbase_setup/data/area.csv'
 INTO TABLE Area
 FIELDS
   TERMINATED BY '||'
   LINES TERMINATED BY '\n'
 IGNORE 1 ROWS (area);
 
-LOAD DATA LOCAL INFILE 'C:/Users/eugen/Documents/Poli-Interactive/db_csvs/bill.csv'
+LOAD DATA LOCAL INFILE '/home/aadon1/public_html/Poli-Interactive/dbase_setup/data/bill.csv'
 INTO TABLE Bill
 FIELDS
   TERMINATED BY '||'
   LINES TERMINATED BY '\n'
 IGNORE 1 ROWS (bill_num,congress,title,date_intro,area,enacted,vetoed);
 
-LOAD DATA LOCAL INFILE 'C:/Users/eugen/Documents/Poli-Interactive/db_csvs/subject.csv'
+LOAD DATA LOCAL INFILE '/home/aadon1/public_html/Poli-Interactive/dbase_setup/data/subject.csv'
 INTO TABLE Subject
 FIELDS
   TERMINATED BY '||'
   LINES TERMINATED BY '\n'
 IGNORE 1 ROWS (subject);
 
-LOAD DATA LOCAL INFILE 'C:/Users/eugen/Documents/Poli-Interactive/db_csvs/bill_subject.csv'
+LOAD DATA LOCAL INFILE '/home/aadon1/public_html/Poli-Interactive/dbase_setup/data/bill_subject.csv'
 INTO TABLE Bill_Subject
 FIELDS
   TERMINATED BY '||'
   LINES TERMINATED BY '\n'
 IGNORE 1 ROWS (bill_num,congress,subject);
 
-LOAD DATA LOCAL INFILE 'C:/Users/eugen/Documents/Poli-Interactive/db_csvs/sponsor.csv'
+LOAD DATA LOCAL INFILE '/home/aadon1/public_html/Poli-Interactive/dbase_setup/data/sponsor.csv'
 INTO TABLE Sponsor
 FIELDS
   TERMINATED BY '||'
   LINES TERMINATED BY '\n'
 IGNORE 1 ROWS (member_id,bill_num,congress);
 
-LOAD DATA LOCAL INFILE 'C:/Users/eugen/Documents/Poli-Interactive/db_csvs/cosponsor.csv'
+LOAD DATA LOCAL INFILE '/home/aadon1/public_html/Poli-Interactive/dbase_setup/data/cosponsor.csv'
 INTO TABLE Cosponsor
 FIELDS
   TERMINATED BY '||'
   LINES TERMINATED BY '\n'
 IGNORE 1 ROWS (member_id,bill_num,congress);
 
-LOAD DATA LOCAL INFILE 'C:/Users/eugen/Documents/Poli-Interactive/db_csvs/vote.csv'
+LOAD DATA LOCAL INFILE '/home/aadon1/public_html/Poli-Interactive/dbase_setup/data/vote.csv'
 INTO TABLE Vote
 FIELDS
     TERMINATED BY '||'
@@ -197,8 +197,8 @@ IGNORE 1 ROWS (member_id,bill_num,congress,position);
 
 UPDATE Role
 SET party = 'I'
-WHERE party != 'ID';
+WHERE party = 'ID';
 
 UPDATE Vote
 SET position = 'Not Voting'
-WHERE position != 'Present';
+WHERE position = 'Present';
