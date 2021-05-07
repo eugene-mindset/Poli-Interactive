@@ -10,8 +10,8 @@
     $stmt->execute();
     $result = $stmt->get_result();
 
-    if (!result) {
-        echo "Call to BirthdayDistribution procedure failed";
+    if (result) {
+        echo '<span class="err">Call to BirthdayDistribution procedure failed</span>';
         $stmt->close();
         $conn->close();
         return;
