@@ -6,6 +6,7 @@ db_csvs/
 
 *.db
 *conf.php
+add_procedures.sh
 
 ## PYTHON
 

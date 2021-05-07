@@ -3,6 +3,7 @@
 -- Stored Procedure to get bill that passed with the most yes votes in the senate
 DELIMITER //
 
+DROP FUNCTION IF EXISTS 
 DROP PROCEDURE IF EXISTS Most_Yes //
 
 CREATE PROCEDURE Most_Yes()
