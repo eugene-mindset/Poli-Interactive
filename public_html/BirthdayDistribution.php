@@ -6,11 +6,12 @@
     // Array where data will be stored
     $birthday_data = array();
 
-    $stmt = $conn->prepare("Call BirthdayDistribution()");
+    $stmt = $conn->prepare("CALL BirthdayDistribution()");
     $stmt->execute();
     $result = $stmt->get_result();
+    echo strval($result->field_count);
 
-    if (result) {
+    if (!result) {
         echo '<span class="err">Call to BirthdayDistribution procedure failed</span>';
         $stmt->close();
         $conn->close();

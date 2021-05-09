@@ -15,15 +15,15 @@
 
     if ($party == "R")
     {
-      $p = "A Republican";
+      $p = "a Republican";
     }
     elseif ($party == "D")
     {
-      $p = "A Democrat";
+      $p = "a Democrat";
     }
     elseif ($party == "I")
     {
-      $p = "A Independent";
+      $p = "a Independent";
     }
     else
     {
@@ -56,7 +56,7 @@
       $v = "Any";
     }
 
-    echo "<h2>{$v} number of bills by {$p} {$c}</h2>";
+    echo "<h2>{$v} Number of Bills by {$p} {$c}</h2>";
 
     $stmt = $conn->prepare("CALL Bills_By_Filter(?,?,?)");
     $stmt->bind_param('sss', $party, $chamber, $value);
