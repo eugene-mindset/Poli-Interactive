@@ -35,7 +35,7 @@
 
 
     //
-    if (!result) {
+    if (!$result) {
       echo "<span class='err'>Call to Bills_By failed</span>";
       $stmt->close();
       $conn->close();
