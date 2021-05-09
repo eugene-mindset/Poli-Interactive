@@ -6,11 +6,11 @@
     // Array where data will be stored
     $birthday_data = array();
 
-    $stmt = $conn->prepare("Call BirthdayDistribution()");
+    $stmt = $conn->prepare("CALL BirthdayDistribution()");
     $stmt->execute();
     $result = $stmt->get_result();
 
-    if (!result) {
+    if (!$result) {
         echo "Call to BirthdayDistribution procedure failed";
         $stmt->close();
         $conn->close();
@@ -20,6 +20,10 @@
     foreach($result as $row) {
         $birthday_data[strval($row["birthday"])] = $row["counts"];
     }
+
+    $result->free_result();
+    $stmt->close();
+    $conn->close();
 ?>
 
 <!DOCTYPE html>
