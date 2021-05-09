@@ -9,7 +9,6 @@
     $stmt = $conn->prepare("CALL BirthdayDistribution()");
     $stmt->execute();
     $result = $stmt->get_result();
-    echo strval($result->field_count);
 
     if (!result) {
         echo '<span class="err">Call to BirthdayDistribution procedure failed</span>';
