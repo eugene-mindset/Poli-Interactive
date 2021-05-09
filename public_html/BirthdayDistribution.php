@@ -39,10 +39,16 @@
 </head>
 <body>
     <div class="container">
-        <h2>Distribution of the Birthday of Members of Congress</h2>
+        <h1>Distribution of the Birthday of Members of Congress</h1>
         <br>
         <div id="cal-heatmap"></div>
+        <br>
+        <h2>Click on a date to see the members of congress born on that day</h2>
     </div>
+    <form id="memberBirthdays" action="MembersByBirthday.php" method="post" style="display:none;">
+        <input type="hidden" id="birthdayMonth" name="birthdayMonth"/>
+        <input type="hidden" id="birthdayDate" name="birthdayDate"/>
+    </form>
 </body>
 <script type="text/javascript">
 	var cal = new CalHeatMap();
@@ -64,6 +70,12 @@
         itemName: ["birthday", "birthdays"],
         subDomainDateFormat: "%B %e",
         subDomainTextFormat: "%d",
+        // Events
+        onClick: function(date, nb) {
+            document.getElementById("birthdayMonth").value = date.getMonth() + 1;
+            document.getElementById("birthdayDate").value = date.getDate();
+            document.getElementById("memberBirthdays").submit();
+        }
     });
 </script>
 <style>
