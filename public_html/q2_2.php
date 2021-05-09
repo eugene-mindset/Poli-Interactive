@@ -65,7 +65,7 @@
 
 
     //
-    if (!result) {
+    if (!$result) {
       echo "<span class='err'>Call to Bills_By_Filter failed</span>";
       $stmt->close();
       $conn->close();
