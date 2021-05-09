@@ -5,12 +5,12 @@
 
     $areasInBills = array();
 
-    $stmt = $conn->prepare("CALL CombinedCounts()");
+    $stmt = $conn->prepare("CALL GetAreasInBills()");
     $stmt->execute();
     $result = $stmt->get_result();
 
     if (!$result) {
-        echo '<span class="err">Call to CombinedCounts procedure failed</span>';
+        echo '<span class="err">Call to GetAreasInBills procedure failed</span>';
         $stmt->close();
         $conn->close();
         return;
