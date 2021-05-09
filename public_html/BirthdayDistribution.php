@@ -11,7 +11,7 @@
     $result = $stmt->get_result();
 
     if (!$result) {
-        echo "Call to BirthdayDistribution procedure failed";
+        echo '<span class="err">Call to BirthdayDistribution procedure failed</span>';
         $stmt->close();
         $conn->close();
         return;
