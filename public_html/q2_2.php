@@ -1,5 +1,5 @@
 <!-- Anderson Adon, aadon1 | Eugene Asare, easare3 -->
-<head><title>Bill with most Senate Yes Votes</title></head>
+<head><title>Number of Bills Sponsored</title></head>
 <body>
   <?php
     // Open a connection to dbase server
