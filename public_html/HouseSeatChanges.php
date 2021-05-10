@@ -1,69 +1,61 @@
 <!-- Anderson Adon, aadon1 | Eugene Asare, easare3 -->
-<head>
-  <title>Bills by State</title>
-  <script type="text/javascript" src="https://cdn.amcharts.com/lib/4/core.js"></script>
-  <script type="text/javascript" src="https://cdn.amcharts.com/lib/4/maps.js"></script>
-  <script type="text/javascript" src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script>
-</head>
-<body>
-  <?php
-    // Open a connection to dbase server
+<?php
+    // Open connection to dbase server
     include 'open.php';
 
-    $typeOfBill = $_POST['type_bill'];
-    $t = ($typeOfBill == 'P') ? "Passed" : "Sponsored";
+    $repsData = array();
 
-    echo "<h2>Number of Bills {$t} by a State's Congressmembers</h2>";
-
-    $stmt = $conn->prepare("CALL Bills_By_State(?)");
-    $stmt->bind_param('s', $typeOfBill);
+    $stmt = $conn->prepare("CALL HouseSeatChanges()");
     $stmt->execute();
     $result = $stmt->get_result();
 
     if (!$result) {
-      echo "<span class='err'>Call to Bills_By_state failed</span>";
-      $stmt->close();
-      $conn->close();
-      return;
+        echo '<span class="err">Call to HouseSeatChanges procedure failed</span>';
+        $stmt->close();
+        $conn->close();
+        return;
     }
 
-    $max_bill = $result->fetch_array(MYSQLI_BOTH)['num_bill'];
-    mysqli_data_seek($result, 0);
-
-    echo "
-    <style>
-    #chartdiv {
-      width: 100%;
-      height: 500px
-    }
-    </style>
-    ";
-    echo '<div id="chartdiv"></div>';
-
-    $map_data = array();
-    if ($result->field_count > 1 && mysqli_num_rows($result) > 0) {
-
-      while ($row = $result->fetch_array(MYSQLI_BOTH)) {
-        $map_data[] = array(
-          "id" => "US-{$row['state']}",
-          "value" => $row['num_bill'],
+    foreach($result as $row) {
+        $repsData[] = array(
+            'id' => "US-{$row['state']}",
+            'numChanges' => $row['numChanges'],
+            'totalReps' => $row['numReps'],
+            'value' => $row['percentChange'],
         );
-      }
     }
 
     $result->free_result();
     $stmt->close();
     $conn->close();
-  ?>
-  <script type="text/javascript" >
-    am4core.ready(function() {
-
-    // Themes begin
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Changes in House Representatives</title>
+    <script type="text/javascript" src="https://cdn.amcharts.com/lib/4/core.js"></script>
+    <script type="text/javascript" src="https://cdn.amcharts.com/lib/4/maps.js"></script>
+    <script type="text/javascript" src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script>
+</head>
+<body>
+    <h2>Heat Map of what percentage of House seats changed members per state</h2>
+    <div id="chartdiv" style="height: 600px; width: 100%;"></div>
+</body>
+<style>
+    body {
+        font-family: "Segoe UI";
+    }
+</style>
+<script>
+    // Themes
     am4core.useTheme(am4themes_animated);
-    // Themes end
 
     // Create map instance
     var chart = am4core.create("chartdiv", am4maps.MapChart);
+    var title = chart.titles.create();
 
     // Set map definition
     chart.geodataSource.url = "https://www.amcharts.com/lib/4/geodata/json/usaTerritoriesHigh.json";
@@ -86,7 +78,7 @@
     polygonSeries.useGeodata = true;
 
     // Set heatmap values for each state
-    polygonSeries.data = <?php echo json_encode($map_data)?>;
+    polygonSeries.data = <?php echo json_encode($repsData)?>;
 
     // Set up heat legend
     let heatLegend = chart.createChild(am4maps.HeatLegend);
@@ -96,15 +88,15 @@
     heatLegend.width = am4core.percent(20);
     heatLegend.marginRight = am4core.percent(4);
     heatLegend.minValue = 0;
-    heatLegend.maxValue = 5000;
+    heatLegend.maxValue = 100;
 
     // Set up custom heat map legend labels using axis ranges
     var minRange = heatLegend.valueAxis.axisRanges.create();
     minRange.value = heatLegend.minValue;
-    minRange.label.text = "0";
+    minRange.label.text = "0%";
     var maxRange = heatLegend.valueAxis.axisRanges.create();
     maxRange.value = heatLegend.maxValue;
-    maxRange.label.text = <?php echo $max_bill?>;
+    maxRange.label.text = "100%";
 
     // Blank out internal heat legend value axis labels
     heatLegend.valueAxis.renderer.labels.template.adapter.add("text", function(labelText) {
@@ -113,14 +105,12 @@
 
     // Configure series tooltip
     var polygonTemplate = polygonSeries.mapPolygons.template;
-    polygonTemplate.tooltipText = "{name}: {value}";
+    polygonTemplate.tooltipText = "[bold]{name}[/]\nChanged Seats: {numChanges}\nTotal Seats: {totalReps}\nPercentage Change: {value}%";
     polygonTemplate.nonScalingStroke = true;
     polygonTemplate.strokeWidth = 0.5;
 
     // Create hover state and set alternative fill color
     var hs = polygonTemplate.states.create("hover");
     hs.properties.fill = am4core.color("#3c5bdc");
-
-    }); // end am4core.ready()
-  </script>
-</body>
+</script>
+</html>
