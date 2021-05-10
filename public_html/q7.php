@@ -66,10 +66,11 @@
     var chart = am4core.create("chartdiv", am4maps.MapChart);
 
     // Set map definition
-    chart.geodata = am4geodata_usaLow;
+    // chart.geodata = am4geodata_usaLow;
+    chart.geodataSource.url = "https://www.amcharts.com/lib/4/geodata/json/usaTerritoriesHigh.json";
 
     // Set projection
-    chart.projection = new am4maps.projections.AlbersUsa();
+    chart.projection = new am4maps.projections.Mercator();
 
     // Create map polygon series
     var polygonSeries = chart.series.push(new am4maps.MapPolygonSeries());
