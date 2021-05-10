@@ -35,12 +35,11 @@
     <script src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script>
 </head>
 <body>
-    <!-- <h1>Number of Proposed and Passed Bills In Each Policy Area</h1> -->
     <div id="chartdiv" style="height: 1600px; width: 100%;"></div>
 </body>
 <style>
     body {
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+        font-family: "Segoe UI";
     }
 </style>
 <script type="text/javascript">
@@ -75,7 +74,6 @@
     series.dataFields.valueX = field;
     series.dataFields.categoryY = "label";
     series.name = name;
-    // series.columns.template.tooltipText = "{categoryY}, {name}: [bold]{valueX}[/]";
     series.tooltipText = "{name}: [bold]{valueX}[/]";
     series.columns.template.height = am4core.percent(100);
     series.sequencedInterpolation = false;
