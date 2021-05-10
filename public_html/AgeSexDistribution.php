@@ -39,6 +39,28 @@
 </head>
 <body>
     <div id="chartdiv" style="height: 600px; width: 100%;"></div>
+    <br><br>
+
+    <form action="AgeRange.php" method="post">
+        Get the congress members who are between the ages of
+        <input type="number" name="minAge" id="minAge" min="25" max="100" step="1">
+        and
+        <input type="number" name="maxAge" id="maxAge" min="25" max="100" step="1">
+        who are
+        <select name="memberSex" id="memberSex">
+            <option value="M">male</option>
+            <option value="F">female</option>
+            <option value="_">of any sex</option>
+        </select>
+        and are
+        <select name="memberParty" id="memberParty">
+            <option value="R">Republican</option>
+            <option value="D">Democrat</option>
+            <option value="I">Independent</option>
+            <option value="_">of any party</option>
+        </select>
+        <input type="submit" value="Go">
+    </form>
 </body>
 <style>
     body {
@@ -77,6 +99,10 @@
         series.dataFields.valueY = field;
         series.dataFields.categoryX = "age";
         series.sequencedInterpolation = false;
+        if (name == "Female") {
+            series.fill = chart.colors.getIndex(4);
+            series.stroke = chart.colors.getIndex(4);
+        }
         
         // Make it stacked
         series.stacked = true;
