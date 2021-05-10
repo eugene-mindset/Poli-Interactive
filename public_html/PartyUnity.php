@@ -49,10 +49,15 @@
     // Loop through each row in result
     if ($row = $result->fetch_array(MYSQLI_BOTH))
     {
-      echo '<div id="charts">
-        <div id="chartdiv1"></div>
-        <div id="chartdiv2"></div>
-      </div>';
+      echo "
+      <b>Title:</b> {$row['title']} <br>
+      <b>Enacted?</b> {$row['enacted']}<br>
+      <b>Vetoed?</b> {$row['vetoed']}
+      <div id='charts'>
+        <div id='chartdiv1'></div>
+        <div id='chartdiv2'></div>
+      </div>
+      ";
     }
     else
     {
@@ -72,7 +77,7 @@
 
   #chartdiv1, #chartdiv2 {
     width: 50%;
-    height: 500px;
+    height: 25vh;
   }
   </style>
 

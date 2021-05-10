@@ -44,8 +44,13 @@ BEGIN
   )
   SELECT
     Dems.position AS dPos, Dems.partySize AS dSize, Dems.numberInAgreement AS dAgree, Dems.unityPerc AS dUnity,
-    Repubs.position AS rPos, Repubs.partySize AS rSize, Repubs.numberInAgreement AS rAgree, Repubs.unityPerc AS rUnity
-  FROM Dems JOIN Repubs;
+    Repubs.position AS rPos, Repubs.partySize AS rSize, Repubs.numberInAgreement AS rAgree, Repubs.unityPerc AS rUnity,
+    title, enacted, vetoed
+  FROM Dems JOIN Repubs JOIN (
+    SELECT *
+    FROM Bill
+    WHERE (bill_num = BINARY billN) AND (congress = BINARY cong)
+  ) AS BillInfo;
 END; //
 
 DELIMITER ;
