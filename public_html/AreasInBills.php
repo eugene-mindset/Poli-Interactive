@@ -35,6 +35,7 @@
     <script src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script>
 </head>
 <body>
+    <!-- <h1>Number of Proposed and Passed Bills In Each Policy Area</h1> -->
     <div id="chartdiv" style="height: 1600px; width: 100%;"></div>
 </body>
 <style>
@@ -48,6 +49,10 @@
 
     // Create chart instance
     var chart = am4core.create("chartdiv", am4charts.XYChart);
+    var title = chart.titles.create();
+    title.text = "Number of Proposed and Passed Bills In Each Policy Area";
+    title.fontSize = 25;
+    title.marginBottom = 30;
 
     // Add data
     chart.data = <?php echo json_encode($areasInBills, JSON_NUMERIC_CHECK); ?>;
@@ -62,7 +67,6 @@
 
     var valueAxis = chart.xAxes.push(new am4charts.ValueAxis());
     valueAxis.renderer.opposite = true;
-    valueAxis.title.text = "Number of Bills\nClick on legend to show/hide";
     valueAxis.cursorTooltipEnabled = false;
 
     // Create series
