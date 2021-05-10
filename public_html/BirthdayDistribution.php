@@ -36,7 +36,8 @@
     <script type="text/javascript" src="//d3js.org/d3.v3.min.js"></script>
     <script type="text/javascript" src="//cdn.jsdelivr.net/cal-heatmap/3.3.10/cal-heatmap.min.js"></script>
     <link rel="stylesheet" href="//cdn.jsdelivr.net/cal-heatmap/3.3.10/cal-heatmap.css" />
-</head>
+    <link rel="stylesheet" href="style.css">
+  </head>
 <body>
     <div class="container">
         <h1>Distribution of the Birthday of Members of Congress</h1>

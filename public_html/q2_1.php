@@ -1,5 +1,8 @@
 <!-- Anderson Adon, aadon1 | Eugene Asare, easare3 -->
-<head><title>Number of Bills Sponsored</title></head>
+<head>
+  <title>Number of Bills Sponsored</title>
+  <link rel="stylesheet" href="style.css">
+</head>
 <body>
   <?php
     // Open a connection to dbase server

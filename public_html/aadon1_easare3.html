@@ -9,7 +9,9 @@ Anderson Adon, aadon1 | Eugene Asare, easare3
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Congress Data</title>
 </head>
+<link rel="stylesheet" href="style.css">
 <body>
+
   <h1>A Look At The United States Congress From 2017 to 2021</h1>
   <br>
 
@@ -88,5 +90,26 @@ Anderson Adon, aadon1 | Eugene Asare, easare3
   <form action="HouseSeatChanges.php">
     <input type="submit" value="Go">
   </form>
+  <br><br>
+
+  <h2>Party Unity for Bills</h2>
+  <form action="PartyUnity.php" method="post">
+    See the party unity for votes on bill
+    <select name="bill_type">
+      <option value="hr">H. R.</option>
+      <option value="hjres">H. J. Res.</option>
+      <option value="s">S.</option>
+      <option value="sjres">S. J. Res.</option>
+    </select>
+    <input type="text" name="bill_num" placeholder="XXX...", pattern="[0-9]{1,4}">
+    of the
+    <select name="congress">
+      <option value="115">115th</option>
+      <option value="116">116th</option>
+    </select>
+    congress.
+    <input type="submit" value="Go">
+  </form>
+  <br><br>
 </body>
 </html>

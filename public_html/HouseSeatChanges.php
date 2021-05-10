@@ -39,6 +39,7 @@
     <script type="text/javascript" src="https://cdn.amcharts.com/lib/4/core.js"></script>
     <script type="text/javascript" src="https://cdn.amcharts.com/lib/4/maps.js"></script>
     <script type="text/javascript" src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <h2>Heat Map of what percentage of House seats changed members per state</h2>
