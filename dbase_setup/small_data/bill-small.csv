@@ -1,0 +1,17 @@
+bill_num||congress||title||date_intro||area||enacted||vetoed
+s1||115||Bernie's Bill 1||2017-01-03||Agriculture and Food||Yes||No
+s2||115||Warren's Bill 1||2017-02-03||Animals||Yes||No
+sjres1||115||Mitch's Bill 1||2017-05-05||Armed Forces and National Security||No||No
+s1||116||Warren's Bill 2||2019-02-03||Arts, Culture, Religion||Yes||No
+sjres1||116||Mitch's Bill 2||2020-10-01||Armed Forces and National Security||Yes||No
+hr1||115||The Amash Bill||2018-06-06||Animals||No||Yes
+hjres1||116||Socialism by AOC||2020-02-21||Arts, Culture, Religion||Yes||No
+hr2||115||Liz Bill||2017-09-11||Armed Forces and National Security||Yes||No
+hr3||115||Clean Waters Bill||2017-12-31||Agriculture and Food||Yes||No
+hjres2||116||Max Bill||2019-06-07||Arts, Culture, Religion||No||No
+hjres2||115||Crowley's Bill||2018-01-20||Arts, Culture, Religion||No||No
+hr4||115||Marsha for Tennessee||2017-04-01||Animals||Yes||No
+hr1||116||Green's New Deal||2020-04-23||Agricultural and Food||Yes||No
+hr5||115||EE Bill||2017-02-03||Armed Forces and National Security||No||No
+hr2||116||EE Bill Part 2||2020-02-03||Armed Forces and National Security||No||No
+hjres3||116||Don's Bill||2019-08-08||||Yes||No
