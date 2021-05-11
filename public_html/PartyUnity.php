@@ -77,7 +77,7 @@
 
   #chartdiv1, #chartdiv2 {
     width: 50%;
-    height: 25vh;
+    min-height: 550px;
   }
   </style>
 
