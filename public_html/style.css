@@ -1,3 +1,7 @@
 .err {
   color: #f00;
 }
+
+table, th, td {
+  border: 1px solid black;
+}

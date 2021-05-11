@@ -38,7 +38,7 @@
     $result = $stmt->get_result();
 
     //
-    if (!$result)
+    if (!result)
     {
       echo "<span class='err'>Call to PartyUnityForBill failed</span>";
       $stmt->close();
@@ -77,6 +77,7 @@
 
   #chartdiv1, #chartdiv2 {
     width: 50%;
+    min-height: 200px;
     height: 25vh;
   }
   </style>

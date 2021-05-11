@@ -56,7 +56,7 @@
         }
 
         if ($result->num_rows > 0) {
-            echo "<table border=\"2px solid black\"><thead><tr>";
+            echo "<table><thead><tr>";
 
             // Create table headers
             $columns = array("Member ID", "First Name", "Middle Name", "Last Name", "Birthday", "Age", "Gender", "Party");

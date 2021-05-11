@@ -8,9 +8,10 @@ Anderson Adon, aadon1 | Eugene Asare, easare3
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Congress Data</title>
+  <link rel="stylesheet" href="style.css">
 </head>
-<link rel="stylesheet" href="style.css">
 <body>
+
 
   <h1>A Look At The United States Congress From 2017 to 2021</h1>
   <br>
@@ -42,21 +43,21 @@ Anderson Adon, aadon1 | Eugene Asare, easare3
   <form action="q2_2.php" method="post">
     Get
     <select name="party">
+      <option value="A">any</option>
       <option value="R">the republican</option>
       <option value="D">the democrat</option>
       <option value="I">the independent</option>
-      <option value="A">any</option>
     </select>
     <select name="chamber">
+      <option value="C">congressmembers</option>
       <option value="H">representatives</option>
       <option value="S">senators</option>
-      <option value="C">congressmembers</option>
     </select>
     with
     <select name="value">
+      <option value="A">any</option>
       <option value="H">the highest</option>
       <option value="L">the lowest</option>
-      <option value="A">any</option>
     </select> number of bills sponsored.
 
     <input type="submit" value="Go">
@@ -92,7 +93,7 @@ Anderson Adon, aadon1 | Eugene Asare, easare3
   </form>
   <br><br>
 
-  <h2>Party Unity for Bills</h2>
+  <h2>Party Unity and Bipartisanship for Bill Votes</h2>
   <form action="PartyUnity.php" method="post">
     See the party unity for votes on bill
     <select name="bill_type">
@@ -110,8 +111,30 @@ Anderson Adon, aadon1 | Eugene Asare, easare3
     congress.
     <input type="submit" value="Go">
   </form>
+
+  <form action="PartisanBills.php">
+    See the votes on bills in each chamber that were entirely partisan. <input type="submit" value="Go">
+  </form>
+
+  <form action="BipartisanVotes.php" method="post">
+    See how many votes on bill
+    <select name="bill_type">
+      <option value="hr">H. R.</option>
+      <option value="hjres">H. J. Res.</option>
+      <option value="s">S.</option>
+      <option value="sjres">S. J. Res.</option>
+    </select>
+    <input type="text" name="bill_num" placeholder="XXX...", pattern="[0-9]{1,4}">
+    of the
+    <select name="congress">
+      <option value="115">115th</option>
+      <option value="116">116th</option>
+    </select>
+    congress came from the opposite party of the sponsor.
+    <input type="submit" value="Go">
+  </form>
   <br><br>
-  
+
   <h2>Bills sponsored and passed by each party</h2>
   <form action="BillCountByParty.php" method="post">
     Get the number of bills

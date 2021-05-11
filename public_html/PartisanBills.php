@@ -8,16 +8,16 @@
     // Open a connection to dbase server
     include 'open.php';
 
-    echo "<h2>Most yes votes in senate</h2>";
+    echo "<h2>Bills That Were Completely Partisan</h2>";
 
     // Create prepared statement
-    $stmt = $conn->prepare("CALL Most_Yes()");
+    $stmt = $conn->prepare("CALL PartisanBills()");
     $stmt->execute();
     $result = $stmt->get_result();
 
     // Validate that query was run successfully
-    if (!result) {
-        echo "Call to Most_Votes failed";
+    if (!$result) {
+        echo "ERROR: Call to PartyUnityForBill failed";
         $stmt->close();
         $conn->close();
         return;

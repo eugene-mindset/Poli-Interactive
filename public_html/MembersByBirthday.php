@@ -34,7 +34,7 @@
         echo "<h2>Members of Congress born on {$formatted_date}</h2>";
 
         if ($result->num_rows > 0) {
-            echo "<table border=\"2px solid black\"><thead><tr>";
+            echo "<table><thead><tr>";
 
             // Create table headers
             $columns = array("First Name", "Middle Name", "Last Name", "Birthday", "Gender");
