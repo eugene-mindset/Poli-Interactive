@@ -1,7 +1,7 @@
--- Anderson Adon aadon1, Eugene Asare easare3
+-- Anderson Adon aadon1, Eugene Asare aadon1
 
 CREATE TABLE IF NOT EXISTS Congress (
-    congress  VARCHAR(3) NOT NULL,
+    congress  VARCHAR(5) NOT NULL,
     startDate DATE NOT NULL,
     endDate   DATE NOT NULL,
     PRIMARY KEY (congress)
@@ -13,16 +13,16 @@ CREATE TABLE IF NOT EXISTS Member (
     middleName  VARCHAR(25),
     lastName    VARCHAR(25) NOT NULL,
     birthday    DATE NOT NULL,
-    gender      VARCHAR(1) NOT NULL,
+    gender      VARCHAR(3) NOT NULL,
     PRIMARY KEY (member_id)
 );
 
 CREATE TABLE IF NOT EXISTS Role (
     member_id VARCHAR(10) NOT NULL,
-    congress  VARCHAR(3) NOT NULL,
+    congress  VARCHAR(5) NOT NULL,
     chamber   VARCHAR(10) NOT NULL,
     party     VARCHAR(20) NOT NULL,
-    state     VARCHAR(2) NOT NULL,
+    state     VARCHAR(5) NOT NULL,
     district  VARCHAR(10),
     PRIMARY KEY (member_id, congress),
     FOREIGN KEY (member_id)
@@ -42,8 +42,8 @@ CREATE TABLE IF NOT EXISTS Area (
 
 CREATE TABLE IF NOT EXISTS Bill (
     bill_num    VARCHAR(15) NOT NULL,
-    congress    VARCHAR(3) NOT NULL,
-    title       VARCHAR(250) NOT NULL,
+    congress    VARCHAR(5) NOT NULL,
+    title       VARCHAR(750) NOT NULL,
     date_intro  DATE NOT NULL,
     area        VARCHAR(100),
     enacted     VARCHAR(10) NOT NULL,
@@ -66,7 +66,7 @@ CREATE TABLE IF NOT EXISTS Subject (
 
 CREATE TABLE IF NOT EXISTS Bill_Subject (
     bill_num VARCHAR(15) NOT NULL,
-    congress VARCHAR(3) NOT NULL,
+    congress VARCHAR(5) NOT NULL,
     subject  VARCHAR(100) NOT NULL,
     PRIMARY KEY (subject, bill_num, congress),
     FOREIGN KEY (bill_num, congress)
@@ -82,7 +82,7 @@ CREATE TABLE IF NOT EXISTS Bill_Subject (
 CREATE TABLE IF NOT EXISTS Sponsor (
     member_id VARCHAR(10) NOT NULL,
     bill_num  VARCHAR(15) NOT NULL,
-    congress  VARCHAR(3) NOT NULL, 
+    congress  VARCHAR(5) NOT NULL, 
     PRIMARY KEY (member_id, bill_num, congress),
     FOREIGN KEY (member_id)
         REFERENCES Member (member_id)
@@ -97,7 +97,7 @@ CREATE TABLE IF NOT EXISTS Sponsor (
 CREATE TABLE IF NOT EXISTS Cosponsor (
     member_id VARCHAR(10) NOT NULL,
     bill_num  VARCHAR(15) NOT NULL,
-    congress  VARCHAR(3) NOT NULL,
+    congress  VARCHAR(5) NOT NULL,
     PRIMARY KEY (member_id, bill_num, congress),
     FOREIGN KEY (member_id)
         REFERENCES Member (member_id)
@@ -112,7 +112,7 @@ CREATE TABLE IF NOT EXISTS Cosponsor (
 CREATE TABLE IF NOT EXISTS Vote (
     member_id VARCHAR(10) NOT NULL,
     bill_num  VARCHAR(15) NOT NULL,
-    congress  VARCHAR(3) NOT NULL,
+    congress  VARCHAR(5) NOT NULL,
     position  VARCHAR(10) NOT NULL,
     PRIMARY KEY (member_id, bill_num, congress),
     FOREIGN KEY (member_id)
@@ -125,70 +125,70 @@ CREATE TABLE IF NOT EXISTS Vote (
             ON UPDATE NO ACTION
 );
 
-LOAD DATA LOCAL INFILE 'C:/Users/eugen/Documents/Poli-Interactive/db_csvs/congress-small.csv'
+LOAD DATA LOCAL INFILE './small_data/congress-small.csv'
 INTO TABLE Congress
 FIELDS
     TERMINATED BY '||'
     LINES TERMINATED BY '\n'
 IGNORE 1 ROWS (congress,startDate,endDate);
 
-LOAD DATA LOCAL INFILE 'C:/Users/eugen/Documents/Poli-Interactive/db_csvs/member-small.csv'
+LOAD DATA LOCAL INFILE './small_data/member-small.csv'
 INTO TABLE Member
 FIELDS
   TERMINATED BY '||'
   LINES TERMINATED BY '\n'
 IGNORE 1 ROWS (member_id,firstName,middleName,lastName,birthday,gender);
 
-LOAD DATA LOCAL INFILE 'C:/Users/eugen/Documents/Poli-Interactive/db_csvs/role-small.csv'
+LOAD DATA LOCAL INFILE './small_data/role-small.csv'
 INTO TABLE Role
 FIELDS
   TERMINATED BY '||'
   LINES TERMINATED BY '\n'
 IGNORE 1 ROWS (member_id,congress,chamber,party,state,district);
 
-LOAD DATA LOCAL INFILE 'C:/Users/eugen/Documents/Poli-Interactive/db_csvs/area-small.csv'
+LOAD DATA LOCAL INFILE './small_data/area-small.csv'
 INTO TABLE Area
 FIELDS
   TERMINATED BY '||'
   LINES TERMINATED BY '\n'
 IGNORE 1 ROWS (area);
 
-LOAD DATA LOCAL INFILE 'C:/Users/eugen/Documents/Poli-Interactive/db_csvs/bill-small.csv'
+LOAD DATA LOCAL INFILE './small_data/bill-small.csv'
 INTO TABLE Bill
 FIELDS
   TERMINATED BY '||'
   LINES TERMINATED BY '\n'
 IGNORE 1 ROWS (bill_num,congress,title,date_intro,area, enacted, vetoed);
 
-LOAD DATA LOCAL INFILE 'C:/Users/eugen/Documents/Poli-Interactive/db_csvs/subject-small.csv'
+LOAD DATA LOCAL INFILE './small_data/subject-small.csv'
 INTO TABLE Subject
 FIELDS
   TERMINATED BY '||'
   LINES TERMINATED BY '\n'
 IGNORE 1 ROWS (subject);
 
-LOAD DATA LOCAL INFILE 'C:/Users/eugen/Documents/Poli-Interactive/db_csvs/bill_subject-small.csv'
+LOAD DATA LOCAL INFILE './small_data/bill_subject-small.csv'
 INTO TABLE Bill_Subject
 FIELDS
   TERMINATED BY '||'
   LINES TERMINATED BY '\n'
 IGNORE 1 ROWS (bill_num,congress,subject);
 
-LOAD DATA LOCAL INFILE 'C:/Users/eugen/Documents/Poli-Interactive/db_csvs/sponsor-small.csv'
+LOAD DATA LOCAL INFILE './small_data/sponsor-small.csv'
 INTO TABLE Sponsor
 FIELDS
   TERMINATED BY '||'
   LINES TERMINATED BY '\n'
 IGNORE 1 ROWS (member_id,bill_num,congress);
 
-LOAD DATA LOCAL INFILE 'C:/Users/eugen/Documents/Poli-Interactive/db_csvs/cosponsor-small.csv'
+LOAD DATA LOCAL INFILE './small_data/cosponsor-small.csv'
 INTO TABLE Cosponsor
 FIELDS
   TERMINATED BY '||'
   LINES TERMINATED BY '\n'
 IGNORE 1 ROWS (member_id,bill_num,congress);
 
-LOAD DATA LOCAL INFILE 'C:/Users/eugen/Documents/Poli-Interactive/db_csvs/vote-small.csv'
+LOAD DATA LOCAL INFILE './small_data/vote-small.csv'
 INTO TABLE Vote
 FIELDS
     TERMINATED BY '||'
