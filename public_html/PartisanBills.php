@@ -23,7 +23,14 @@
         return;
     }
 
-    echo "<table><tbody>";
+    echo "<table><thead><tr>";
+
+    $columns = array("Bill Number", "Congress", "Title", "Date Introduced", "ARrea");
+    foreach($columns as $column) {
+      echo "<th>{$column}</th>";
+    }
+    echo '</tr></thead><tbody>';
+
     // Loop through each row in result
     foreach($result as $row){
         echo "<tr>";

@@ -61,7 +61,7 @@
     }
     else
     {
-      echo "<span class='err'>Bill entered does not exist</span>";
+      echo "<span class='err'>Bill entered does not have any votes.</span>";
       $stmt->close();
       $conn->close();
       return;
@@ -72,18 +72,6 @@
     $conn->close();
   ?>
   <!-- Styles -->
-  <style>
-
-  #charts {
-    display: flex;
-  }
-
-  #chartdiv1, #chartdiv2 {
-    width: 50%;
-    min-height: 200px;
-    height: 25vh;
-  }
-  </style>
 
   <!-- Resources -->
   <script src="https://cdn.amcharts.com/lib/4/core.js"></script>

@@ -93,13 +93,13 @@
 
 
   if ($result->field_count > 1 && mysqli_num_rows($result) > 0) {
-    echo "<br><table><tbody>";
+    echo "<br> <table><thead><tr>";
 
-    $columns = array('chamber', 'party', 'firstName', 'middleName', 'lastName');
+    $columns = array("Chamber", "Party", "First Name", "Middle NAme", "Last Name");
     foreach($columns as $column) {
       echo "<th>{$column}</th>";
     }
-
+    echo '</tr></thead><tbody>';
 
     // Loop through each row in result
     foreach($result as $row){
