@@ -44,6 +44,7 @@
         foreach($columns as $column) {
           echo "<th>{$column}</th>";
         }
+        echo '</tr></thead><tbody>';
 
         foreach($result as $row) {
           echo "<tr>";
@@ -53,6 +54,7 @@
           }
           echo "</tr>";
         }
+        echo "</tbody></table>";
       } else {
         echo '<div class="alert alert-secondary" role="alert">';
         echo 'There are no members of congress born on this day.</div>';

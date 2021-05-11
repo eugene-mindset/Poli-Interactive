@@ -1,6 +1,4 @@
-<!--
-Anderson Adon, aadon1 | Eugene Asare, easare3
- -->
+<!-- Anderson Adon, aadon1 | Eugene Asare, easare3 -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,8 +13,16 @@ Anderson Adon, aadon1 | Eugene Asare, easare3
   <h1>A Look At The United States Congress From 2017 to 2021</h1>
   <br>
 
-  <h2>Bill with most Senate Yes Votes</h2>
-  <form action="q1.php">
+  <h2>Most and least popular bills in the Senate</h2>
+  <form action="TopBillsInSenate.php" method="post">
+    Get the top
+    <input type="number" name="topCount" id="topCount" min="1" max="500" step="1" value="5" required>
+    bills that were voted on in the Senate that received the most
+    <select name="votePosition" id="votePosition">
+      <option value="Yes">Yes</option>
+      <option value="No">No</option>
+    </select>
+    votes.
     <input type="submit" value="Go">
   </form>
   <br/><br/>
