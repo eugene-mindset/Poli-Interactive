@@ -62,6 +62,9 @@
     else
     {
       echo "<span class='err'>Bill entered does not exist</span>";
+      $stmt->close();
+      $conn->close();
+      return;
     }
 
 
