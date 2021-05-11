@@ -136,5 +136,273 @@
     <input type="submit" value="Go">
   </form>
   <br>
+
+  <h2>Inserting Information</h2>
+
+  <form action="InsertMember.php" method="post">
+    Add congressmember
+    <input type="text" name="firstName" placeholder="First name..."">
+    <input type="text" name="middleName" placeholder="Middle name...">
+    <input type="text" name="lastName" placeholder="Last name..."">
+    , with member_id
+    <input type="text" name="member_id" placeholder="Member id..."">
+    , born on
+    <input type="text" name="birthdate" placeholder="YYYY-MM-DD", pattern="[0-9]{4,4}-[0-9]{2,2}-[0-9]{2,2}">
+    and is <select name="sex">
+      <option value="M">Male</option>
+      <option value="F">Female</option>
+      <option value="O">Other</option>
+    </select>
+    <input type="submit" value="Go">
+  </form>
+
+  <form action="InsertRole.php" method="post">
+    Add
+    <input type="text" name="member_id" placeholder="Member id..."">
+    role in
+    <select name="congress">
+      <option value="115">115th</option>
+      <option value="116">116th</option>
+    </select>
+    congress, that role being a(n)
+    <select name="party">
+      <option value="R">Republican</option>
+      <option value="D">Democrat</option>
+      <option value="I">Independent</option>
+    </select>
+    <select name="chamber">
+      <option value="H">Representative</option>
+      <option value="S">Senator</option>
+    </select>
+    of
+    <input type="text" name="state" placeholder="State/Territory..."">
+    <input type="text" name="district" placeholder="District...">
+    .
+    <input type="submit" value="Go">
+  </form>
+
+  <form action="InsertBill.php" method="post">
+    Add bill
+    <select name="bill_type">
+      <option value="hr">H. R.</option>
+      <option value="hjres">H. J. Res.</option>
+      <option value="s">S.</option>
+      <option value="sjres">S. J. Res.</option>
+    </select>
+    <input type="text" name="bill_num" placeholder="XXX...", pattern="[0-9]{1,4}">
+    of the
+    <select name="congress">
+      <option value="115">115th</option>
+      <option value="116">116th</option>
+    </select>
+    congress, titled
+    <input type="text" name="title" placeholder="Title..."">
+    , introduced on
+    <input type="text" name="birthdate" placeholder="YYYY-MM-DD", pattern="[0-9]{4,4}-[0-9]{2,2}-[0-9]{2,2}">,
+    pertaining to the bill area
+    <input type="text" name="area" placeholder="Area..."">,
+    which
+    <select name="enacted">
+      <option value="Yes">was</option>
+      <option value="No">was not</option>
+    </select>
+    enacted and
+    <select name="vetoed">
+      <option value="Yes">was</option>
+      <option value="No">was not</option>
+    </select>
+    vetoed.
+    <input type="submit" value="Go">
+  </form>
+
+  <form action="InsertBillSubject.php" method="post">
+    For bill
+    <select name="bill_type">
+      <option value="hr">H. R.</option>
+      <option value="hjres">H. J. Res.</option>
+      <option value="s">S.</option>
+      <option value="sjres">S. J. Res.</option>
+    </select>
+    <input type="text" name="bill_num" placeholder="XXX...", pattern="[0-9]{1,4}">
+    of the
+    <select name="congress">
+      <option value="115">115th</option>
+      <option value="116">116th</option>
+    </select>
+    congress, add the bill subject
+    <input type="text" name="subject" placeholder="Subject..."">.
+  </form>
+
+  <form action="InsertSponsor.php" method="post">
+    For bill
+    <select name="bill_type">
+      <option value="hr">H. R.</option>
+      <option value="hjres">H. J. Res.</option>
+      <option value="s">S.</option>
+      <option value="sjres">S. J. Res.</option>
+    </select>
+    <input type="text" name="bill_num" placeholder="XXX...", pattern="[0-9]{1,4}">
+    of the
+    <select name="congress">
+      <option value="115">115th</option>
+      <option value="116">116th</option>
+    </select>
+    congress, give it the sponsor
+    <input type="text" name="member_id" placeholder="Sponsor's member_id..."">.
+  </form>
+
+  <form action="InsertCosponsor.php" method="post">
+    For bill
+    <select name="bill_type">
+      <option value="hr">H. R.</option>
+      <option value="hjres">H. J. Res.</option>
+      <option value="s">S.</option>
+      <option value="sjres">S. J. Res.</option>
+    </select>
+    <input type="text" name="bill_num" placeholder="XXX...", pattern="[0-9]{1,4}">
+    of the
+    <select name="congress">
+      <option value="115">115th</option>
+      <option value="116">116th</option>
+    </select>
+    congress, give it the cosponsor
+    <input type="text" name="member_id" placeholder="Cosponsor's member_id..."">.
+  </form>
+
+  <form action="InsertVote.php" method="post">
+    For bill
+    <select name="bill_type">
+      <option value="hr">H. R.</option>
+      <option value="hjres">H. J. Res.</option>
+      <option value="s">S.</option>
+      <option value="sjres">S. J. Res.</option>
+    </select>
+    <input type="text" name="bill_num" placeholder="XXX...", pattern="[0-9]{1,4}">
+    of the
+    <select name="congress">
+      <option value="115">115th</option>
+      <option value="116">116th</option>
+    </select>
+    congress, add the vote of
+    <input type="text" name="member_id" placeholder="Voter's member_id..."">
+    , their position being
+    <select name="position">
+      <option value="Yes">yes</option>
+      <option value="No">no</option>
+      <option value="Not Voting">not voting</option>
+    </select>.
+  </form>
+  <br>
+
+  <h2>Deleting Information</h2>
+  <form action="DeleteMember.php" method="post">
+    Remove congressmember
+    <input type="text" name="member_id" placeholder="Member id..."">
+    's personal information.
+    <input type="submit" value="Go">
+  </form>
+
+  <form action="DeleteRole.php" method="post">
+    Remove
+    <input type="text" name="member_id" placeholder="Member id..."">
+    role in
+    <select name="congress">
+      <option value="115">115th</option>
+      <option value="116">116th</option>
+    </select>
+    congress.
+    <input type="submit" value="Go">
+  </form>
+
+  <form action="DeleteBill.php" method="post">
+    Remove the bill
+    <select name="bill_type">
+      <option value="hr">H. R.</option>
+      <option value="hjres">H. J. Res.</option>
+      <option value="s">S.</option>
+      <option value="sjres">S. J. Res.</option>
+    </select>
+    <input type="text" name="bill_num" placeholder="XXX...", pattern="[0-9]{1,4}">
+    of the
+    <select name="congress">
+      <option value="115">115th</option>
+      <option value="116">116th</option>
+    </select>
+    congress.
+    <input type="submit" value="Go">
+  </form>
+
+  <form action="DeleteBillSubject.php" method="post">
+    For bill
+    <select name="bill_type">
+      <option value="hr">H. R.</option>
+      <option value="hjres">H. J. Res.</option>
+      <option value="s">S.</option>
+      <option value="sjres">S. J. Res.</option>
+    </select>
+    <input type="text" name="bill_num" placeholder="XXX...", pattern="[0-9]{1,4}">
+    of the
+    <select name="congress">
+      <option value="115">115th</option>
+      <option value="116">116th</option>
+    </select>
+    congress, remove the subject
+    <input type="text" name="subject" placeholder="Subject..."">.
+  </form>
+
+  <form action="DeleteSponsor.php" method="post">
+    For bill
+    <select name="bill_type">
+      <option value="hr">H. R.</option>
+      <option value="hjres">H. J. Res.</option>
+      <option value="s">S.</option>
+      <option value="sjres">S. J. Res.</option>
+    </select>
+    <input type="text" name="bill_num" placeholder="XXX...", pattern="[0-9]{1,4}">
+    of the
+    <select name="congress">
+      <option value="115">115th</option>
+      <option value="116">116th</option>
+    </select>
+    congress, remove it's sponsor.
+  </form>
+
+  <form action="DeleteCosponsor.php" method="post">
+    For bill
+    <select name="bill_type">
+      <option value="hr">H. R.</option>
+      <option value="hjres">H. J. Res.</option>
+      <option value="s">S.</option>
+      <option value="sjres">S. J. Res.</option>
+    </select>
+    <input type="text" name="bill_num" placeholder="XXX...", pattern="[0-9]{1,4}">
+    of the
+    <select name="congress">
+      <option value="115">115th</option>
+      <option value="116">116th</option>
+    </select>
+    congress, remove the cosponsor
+    <input type="text" name="member_id" placeholder="Cosponsor's member_id..."">.
+  </form>
+
+  <form action="DeleteVote.php" method="post">
+    Remove
+    <input type="text" name="member_id" placeholder="Voter's member_id..."">
+    's vote for bill
+    <select name="bill_type">
+      <option value="hr">H. R.</option>
+      <option value="hjres">H. J. Res.</option>
+      <option value="s">S.</option>
+      <option value="sjres">S. J. Res.</option>
+    </select>
+    <input type="text" name="bill_num" placeholder="XXX...", pattern="[0-9]{1,4}">
+    of the
+    <select name="congress">
+      <option value="115">115th</option>
+      <option value="116">116th</option>
+    </select>
+    congress.
+  </form>
+
 </body>
 </html>

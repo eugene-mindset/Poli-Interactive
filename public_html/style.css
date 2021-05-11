@@ -49,3 +49,7 @@ tr:hover {
   min-height: 550px;
   height: 25vh;
 }
+
+form {
+  margin: 10px 0px;
+}
