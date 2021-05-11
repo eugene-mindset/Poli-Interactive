@@ -17,7 +17,7 @@
 
     // Validate that query was run successfully
     if (!$result) {
-        echo "ERROR: Call to PartyUnityForBill failed";
+        echo "<span class='err'>Call to PartyUnityForBill failed</span>";
         $stmt->close();
         $conn->close();
         return;

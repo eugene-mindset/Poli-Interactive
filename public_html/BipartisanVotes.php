@@ -41,7 +41,7 @@
 
   // Validate that query was run successfully
   if (!$result) {
-      echo "<span class=\"err\">ERROR: Call to Bipartisan_Votes failed</span>";
+      echo "<span class=\"err\">Call to Bipartisan_Votes failed</span>";
       $stmt->close();
       $conn->close();
       return;
@@ -85,7 +85,7 @@
 
   // Validate that query was run successfully
   if (!$result) {
-    echo "<br><br><span class=\"err\">ERROR: Call to Bipartisan_Votes failed</span>";
+    echo "<br><br><span class=\"err\">Call to Bipartisan_Votes failed</span>";
     $stmt->close();
     $conn->close();
     return;

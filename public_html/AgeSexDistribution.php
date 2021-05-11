@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <h2>Age and Sex Distribution of Congress</h2>
   <?php
     // Open connection to dbase server
     include 'open.php';

@@ -15,19 +15,19 @@
       echo "<h2>Number of bills sponsored for congressmember {$firstN} {$middleN} {$lastN}</h2>";
 
       if (strlen($firstN) > 25) {
-        echo "<span class='err'>ERROR: first name field must be less than 25 characters</span>";
+        echo "<span class='err'>first name field must be less than 25 characters</span>";
         $conn->close();
         return;
       }
 
       if (strlen($middleN) > 25) {
-        echo "<span class='err'>ERROR: middle name field must be less than 25 characters</span>";
+        echo "<span class='err'>middle name field must be less than 25 characters</span>";
         $conn->close();
         return;
       }
 
       if (strlen($lastN) > 25) {
-        echo "<span class='err'>ERROR: last name field must be less than 25 characters</span>";
+        echo "<span class='err'>last name field must be less than 25 characters</span>";
         $conn->close();
         return;
       }
@@ -70,7 +70,7 @@
         echo "</tbody></table>";
 
       } else {
-        echo "<span class='err'>ERROR: No congressmember named {$firstN} {$middleN} {$lastN}</span>";
+        echo "<span class='err'>No congressmember named {$firstN} {$middleN} {$lastN}</span>";
 
       }
 

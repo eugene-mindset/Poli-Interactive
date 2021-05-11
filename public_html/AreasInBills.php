@@ -1,28 +1,5 @@
 <!-- Anderson Adon, aadon1 | Eugene Asare, easare3 -->
-<?php
-  // Open connection to dbase server
-  include 'open.php';
 
-  $areasInBills = array();
-
-  $stmt = $conn->prepare("CALL GetAreasInBills()");
-  $stmt->execute();
-  $result = $stmt->get_result();
-
-  if (!$result) {
-    echo '<span class="err">Call to GetAreasInBills procedure failed</span>';
-    $stmt->close();
-    $conn->close();
-    return;
-  }
-
-  foreach($result as $row) {
-    array_push($areasInBills, array("label"=>$row["area"], "Proposed"=>$row["proposed"], "Passed"=>$row["passed"]));
-  }
-  $result->free_result();
-  $stmt->close();
-  $conn->close();
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -35,7 +12,33 @@
   <script src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script>
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
+  <h2>Bills Across Policy Areas</h2>
+  <?php
+    // Open connection to dbase server
+    include 'open.php';
+
+    $areasInBills = array();
+
+    $stmt = $conn->prepare("CALL GetAreasInBills()");
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if (!$result) {
+      echo '<span class="err">Call to GetAreasInBills procedure failed</span>';
+      $stmt->close();
+      $conn->close();
+      return;
+    }
+
+    foreach($result as $row) {
+      array_push($areasInBills, array("label"=>$row["area"], "Proposed"=>$row["proposed"], "Passed"=>$row["passed"]));
+    }
+    $result->free_result();
+    $stmt->close();
+    $conn->close();
+  ?>
   <div id="chartdiv" style="height: 1600px; width: 100%;"></div>
 </body>
 <script type="text/javascript">

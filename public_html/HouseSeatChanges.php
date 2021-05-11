@@ -1,34 +1,4 @@
 <!-- Anderson Adon, aadon1 | Eugene Asare, easare3 -->
-<?php
-    // Open connection to dbase server
-    include 'open.php';
-
-    $repsData = array();
-
-    $stmt = $conn->prepare("CALL HouseSeatChanges()");
-    $stmt->execute();
-    $result = $stmt->get_result();
-
-    if (!$result) {
-        echo '<span class="err">Call to HouseSeatChanges procedure failed</span>';
-        $stmt->close();
-        $conn->close();
-        return;
-    }
-
-    foreach($result as $row) {
-        $repsData[] = array(
-            'id' => "US-{$row['state']}",
-            'numChanges' => $row['numChanges'],
-            'totalReps' => $row['numReps'],
-            'value' => $row['percentChange'],
-        );
-    }
-
-    $result->free_result();
-    $stmt->close();
-    $conn->close();
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -43,13 +13,39 @@
 </head>
 <body>
     <h2>Heat Map of what percentage of House seats changed members per state</h2>
+    <!-- Anderson Adon, aadon1 | Eugene Asare, easare3 -->
+    <?php
+        // Open connection to dbase server
+        include 'open.php';
+
+        $repsData = array();
+
+        $stmt = $conn->prepare("CALL HouseSeatChanges()");
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        if (!$result) {
+            echo '<span class="err">Call to HouseSeatChanges procedure failed</span>';
+            $stmt->close();
+            $conn->close();
+            return;
+        }
+
+        foreach($result as $row) {
+            $repsData[] = array(
+                'id' => "US-{$row['state']}",
+                'numChanges' => $row['numChanges'],
+                'totalReps' => $row['numReps'],
+                'value' => $row['percentChange'],
+            );
+        }
+
+        $result->free_result();
+        $stmt->close();
+        $conn->close();
+    ?>
     <div id="chartdiv" style="height: 600px; width: 100%;"></div>
 </body>
-<style>
-    body {
-        font-family: "Segoe UI";
-    }
-</style>
 <script>
     // Themes
     am4core.useTheme(am4themes_animated);

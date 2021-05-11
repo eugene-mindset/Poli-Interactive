@@ -38,7 +38,7 @@
     $result = $stmt->get_result();
 
     //
-    if (!result)
+    if (!$result)
     {
       echo "<span class='err'>Call to PartyUnityForBill failed</span>";
       $stmt->close();

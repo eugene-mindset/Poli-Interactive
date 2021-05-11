@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <h2>Birthday Distribution of Congress</h2>
   <div class="birthdayContainer">
     <?php
       // Open connection to dbase server

@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="./style.css">
 </head>
 <body>
+  <h2>Bills Passed by Party</h2>
   <div class="container">
     <?php
       // Open connection to dbase server
