@@ -1,0 +1,3 @@
+Anderson Adon, aadon1 | Eugene Asare, easare3
+
+In addition to making our `.html` files world readable, we have a `.css` file called `style.css` inside `public_html/` that must also be world readable to get it to work.
