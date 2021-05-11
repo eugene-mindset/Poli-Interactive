@@ -14,27 +14,16 @@
   <h1>A Look At The United States Congress From 2017 to 2021</h1>
   <br>
 
-  <h2>Most and least popular bills in the Senate</h2>
-  <form action="TopBillsInSenate.php" method="post">
-    Get the top
-    <input type="number" name="topCount" id="topCount" min="1" max="500" step="1" value="5" required>
-    bills that were voted on in the Senate that received the most
-    <select name="votePosition" id="votePosition">
-      <option value="Yes">Yes</option>
-      <option value="No">No</option>
-    </select>
-    votes.
-    <input type="submit" value="Go">
-  </form>
-  <br/><br/>
-
-  <h2>How are the birthdays of members of Congress distributed throughout the days of the day year?</h2>
+  <h2>Identities of Congressmembers</h2>
   <form action="BirthdayDistribution.php">
-    <input type="submit" value="Go">
+    See the distribution of birthdays in congress. <input type="submit" value="Go">
   </form>
-  <br/><br/>
+  <form action="AgeSexDistribution.php">
+    See the age and sex distribution of members in congress. <input type="submit" value="Go">
+  </form>
+  <br>
 
-  <h2>Congressmembers by Bills Sponsored</h2>
+  <h2>Bills, Policy Areas, and Sponsorships</h2>
   <form action="q2_1.php" method="post">
     Get the number of bills sponsored by
     <input type="text" name="firstName" placeholder="First name..."">
@@ -44,7 +33,6 @@
 
     <input type="submit" value="Go">
   </form>
-  <br>
 
   <form action="q2_2.php" method="post">
     Get
@@ -68,9 +56,24 @@
 
     <input type="submit" value="Go">
   </form>
-  <br/><br/>
 
-  <h2>Bill Sponsorship by State</h2>
+  <form action="TopBillsInSenate.php" method="post">
+    Get the top
+    <input type="number" name="topCount" id="topCount" min="1" max="500" step="1" value="5" required>
+    bills that were voted on in the Senate that received the most
+    <select name="votePosition" id="votePosition">
+      <option value="Yes">Yes</option>
+      <option value="No">No</option>
+    </select>
+    votes.
+    <input type="submit" value="Go">
+  </form>
+  <form action="AreasInBills.php">
+    See how many times a bill was proposed or passed by for different bill subjects. <input type="submit" value="Go">
+  </form>
+  <br>
+
+  <h2>State Representation</h2>
   <form action="q7.php" method="post">
     Get the number of bills
     <select name="type_bill">
@@ -79,27 +82,20 @@
     </select> by congressmembers representing each state.
     <input type="submit" value="Go">
   </form>
-  <br><br>
-
-  <h2>How many times do the different policy areas appear in proposed and passed bills?</h2>
-  <form action="AreasInBills.php">
-    <input type="submit" value="Go">
-  </form>
-  <br><br>
-
-  <h2>What is the age and sex distribution of members of Congress?</h2>
-  <form action="AgeSexDistribution.php">
-    <input type="submit" value="Go">
-  </form>
-  <br><br>
-
-  <h2>How many house seats in each state had a change in representative from the 115th to 116th Congress?</h2>
   <form action="HouseSeatChanges.php">
+    See the change in state representation between the 115th and 116th congress. <input type="submit" value="Go">
+  </form>
+  <br>
+
+  <h2>Party, Unity, and Bipartisanship</h2>
+  <form action="BillCountByParty.php" method="post">
+    Get the number of bills
+    <select name="passed_or_sponsored">
+      <option value="S">sponsored</option>
+      <option value="P">passed</option>
+    </select> by each party.
     <input type="submit" value="Go">
   </form>
-  <br><br>
-
-  <h2>Party Unity and Bipartisanship for Bill Votes</h2>
   <form action="PartyUnity.php" method="post">
     See the party unity for votes on bill
     <select name="bill_type">
@@ -139,16 +135,6 @@
     congress came from the opposite party of the sponsor.
     <input type="submit" value="Go">
   </form>
-  <br><br>
-
-  <h2>Bills sponsored and passed by each party</h2>
-  <form action="BillCountByParty.php" method="post">
-    Get the number of bills
-    <select name="passed_or_sponsored">
-      <option value="S">sponsored</option>
-      <option value="P">passed</option>
-    </select> by each party.
-    <input type="submit" value="Go">
-  </form>
+  <br>
 </body>
 </html>
