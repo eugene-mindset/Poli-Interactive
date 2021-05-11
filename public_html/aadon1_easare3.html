@@ -171,8 +171,8 @@
       <option value="I">Independent</option>
     </select>
     <select name="chamber">
-      <option value="H">Representative</option>
-      <option value="S">Senator</option>
+      <option value="house">Representative</option>
+      <option value="senate">Senator</option>
     </select>
     of
     <input type="text" name="state" placeholder="State/Territory..."">
@@ -198,7 +198,7 @@
     congress, titled
     <input type="text" name="title" placeholder="Title..."">
     , introduced on
-    <input type="text" name="birthdate" placeholder="YYYY-MM-DD", pattern="[0-9]{4,4}-[0-9]{2,2}-[0-9]{2,2}">,
+    <input type="text" name="date" placeholder="YYYY-MM-DD", pattern="[0-9]{4,4}-[0-9]{2,2}-[0-9]{2,2}">,
     pertaining to the bill area
     <input type="text" name="area" placeholder="Area..."">,
     which
@@ -231,6 +231,7 @@
     </select>
     congress, add the bill subject
     <input type="text" name="subject" placeholder="Subject..."">.
+    <input type="submit" value="Go">
   </form>
 
   <form action="InsertSponsor.php" method="post">
@@ -249,6 +250,7 @@
     </select>
     congress, give it the sponsor
     <input type="text" name="member_id" placeholder="Sponsor's member_id..."">.
+    <input type="submit" value="Go">
   </form>
 
   <form action="InsertCosponsor.php" method="post">
@@ -267,6 +269,7 @@
     </select>
     congress, give it the cosponsor
     <input type="text" name="member_id" placeholder="Cosponsor's member_id..."">.
+    <input type="submit" value="Go">
   </form>
 
   <form action="InsertVote.php" method="post">
@@ -291,6 +294,7 @@
       <option value="No">no</option>
       <option value="Not Voting">not voting</option>
     </select>.
+    <input type="submit" value="Go">
   </form>
   <br>
 
@@ -348,6 +352,7 @@
     </select>
     congress, remove the subject
     <input type="text" name="subject" placeholder="Subject..."">.
+    <input type="submit" value="Go">
   </form>
 
   <form action="DeleteSponsor.php" method="post">
@@ -365,6 +370,7 @@
       <option value="116">116th</option>
     </select>
     congress, remove it's sponsor.
+    <input type="submit" value="Go">
   </form>
 
   <form action="DeleteCosponsor.php" method="post">
@@ -383,6 +389,7 @@
     </select>
     congress, remove the cosponsor
     <input type="text" name="member_id" placeholder="Cosponsor's member_id..."">.
+    <input type="submit" value="Go">
   </form>
 
   <form action="DeleteVote.php" method="post">
@@ -402,6 +409,7 @@
       <option value="116">116th</option>
     </select>
     congress.
+    <input type="submit" value="Go">
   </form>
 
 </body>

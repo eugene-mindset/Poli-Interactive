@@ -689,19 +689,24 @@ BEGIN
   IF billInfo = "Y" THEN
     WITH PartyBill AS
     (
-        SELECT bill_num, title, enacted, vetoed, congress, member_id, party
+        SELECT bill_num, title, enacted, vetoed, congress, member_id, party AS bill_party
         FROM (Bill JOIN Sponsor USING (bill_num, congress)) JOIN Role USING (member_id, congress)
         WHERE (bill_num = billN) AND (congress = cong)
     ),
     PartyVote AS
     (
-        SELECT bill_num, congress, chamber, party, position
+        SELECT chamber, party AS vote_party, position
         FROM (Bill JOIN Vote USING (bill_num, congress)) JOIN Role USING (member_id, congress)
-        WHERE (bill_num = billN) AND (congress = cong)
+        WHERE (bill_num = billN) AND (congress = cong) AND position = 'Yes'
+    ),
+    NonPartyCount AS
+    (
+      SELECT COUNT(position) AS crosses
+      FROM PartyBill JOIN PartyVote
+      WHERE (bill_party != vote_party AND position = 'Yes')
     )
-    SELECT firstName, middleName, lastName, title, enacted, vetoed, PartyBill.party as bill_party, COUNT(position) AS crosses
-    FROM (PartyBill JOIN PartyVote USING (bill_num, congress)) JOIN Member USING (member_id)
-    WHERE (PartyBill.party != PartyVote.party AND position = 'Yes');
+    SELECT firstName, middleName, lastName, title, enacted, vetoed, bill_party, crosses
+    FROM (PartyBill JOIN Member USING (member_id)) JOIN NonPartyCount;
   ELSE
 
     WITH PartyBill AS
@@ -770,6 +775,257 @@ BEGIN
         ) AS b
         USING (party);
     END IF;
+END; //
+
+DELIMITER ;
+
+DELIMITER //
+
+CREATE PROCEDURE IF NOT EXISTS InsertMember
+(
+  IN i_member_id    VARCHAR(10),
+  IN i_firstName    VARCHAR(25),
+  IN i_middleName   VARCHAR(25),
+  IN i_lastName     VARCHAR(25),
+  IN i_birthday     DATE,
+  IN i_gender       VARCHAR(3)
+)
+BEGIN
+  INSERT INTO Member VALUES
+  (
+    i_member_id,
+    i_firstName,
+    i_middleName,
+    i_lastName,
+    i_birthday,
+    i_gender
+  );
+
+  IF EXISTS
+  (
+    SELECT *
+    FROM Member
+    WHERE member_id = i_member_id
+  )
+  THEN
+    SELECT * FROM Member WHERE member_id = i_member_id;
+  ELSE
+    SELECT * FROM Member WHERE false;
+  END IF;
+END; //
+
+DELIMITER ;
+
+DELIMITER //
+
+CREATE PROCEDURE IF NOT EXISTS InsertRole
+(
+  IN i_member_id    VARCHAR(10),
+  IN i_congress     VARCHAR(5),
+  IN i_chamber      VARCHAR(10),
+  IN i_party        VARCHAR(20),
+  IN i_state        VARCHAR(5),
+  IN i_district     VARCHAR(10)
+)
+BEGIN
+  INSERT INTO Role VALUES
+  (
+    i_member_id,
+    i_congress,
+    i_chamber,
+    i_party,
+    i_state,
+    i_district
+  );
+
+  IF EXISTS
+  (
+    SELECT *
+    FROM Role
+    WHERE (member_id = i_member_id) AND (congress = i_congress)
+  )
+  THEN
+    SELECT * FROM Role WHERE (member_id = i_member_id) AND (congress = i_congress);
+  ELSE
+    SELECT * FROM Role WHERE false;
+  END IF;
+END; //
+
+DELIMITER ;
+
+
+DELIMITER //
+
+DROP PROCEDURE IF EXISTS InsertBill //
+
+CREATE PROCEDURE IF NOT EXISTS InsertBill
+(
+  IN i_bill_num     VARCHAR(15),
+  IN i_congress     VARCHAR(5),
+  IN i_title        VARCHAR(750),
+  IN i_date_intro   DATE,
+  IN i_area         VARCHAR(100),
+  IN i_enacted      VARCHAR(10),
+  IN i_vetoed       VARCHAR(10)
+)
+BEGIN
+  INSERT INTO Bill VALUES
+  (
+    i_bill_num,
+    i_congress,
+    i_title,
+    i_date_intro,
+    i_area,
+    i_enacted,
+    i_vetoed
+  );
+
+  IF EXISTS
+  (
+    SELECT *
+    FROM Bill
+    WHERE (bill_num = i_bill_num) AND (congress = i_congress)
+  )
+  THEN
+    SELECT * FROM Bill WHERE (bill_num = i_bill_num) AND (congress = i_congress);
+  ELSE
+    SELECT * FROM Bill WHERE false;
+  END IF;
+END; //
+
+DELIMITER ;
+
+
+DELIMITER //
+
+CREATE PROCEDURE IF NOT EXISTS InsertBillSubject
+(
+  IN i_bill_num     VARCHAR(15),
+  IN i_congress     VARCHAR(5),
+  IN i_subject      VARCHAR(100)
+)
+BEGIN
+  INSERT INTO Bill_Subject VALUES
+  (
+    i_bill_num,
+    i_congress,
+    i_subject
+  );
+
+  IF EXISTS
+  (
+    SELECT *
+    FROM Bill_Subject
+    WHERE (bill_num = i_bill_num) AND (congress = i_congress) AND (i_subject = subject)
+  )
+  THEN
+    SELECT *
+    FROM Bill_Subject
+    WHERE (bill_num = i_bill_num) AND (congress = i_congress) AND (i_subject = subject);
+  ELSE
+    SELECT * FROM Bill_Subject WHERE false;
+  END IF;
+END; //
+
+DELIMITER ;
+
+DELIMITER //
+
+CREATE PROCEDURE IF NOT EXISTS InsertSponsor
+(
+  IN i_member_id    VARCHAR(100),
+  IN i_bill_num     VARCHAR(15),
+  IN i_congress     VARCHAR(5)
+)
+BEGIN
+  INSERT INTO Sponsor VALUES
+  (
+    i_member_id,
+    i_bill_num,
+    i_congress
+  );
+
+  IF EXISTS
+  (
+    SELECT *
+    FROM Sponsor
+    WHERE (bill_num = i_bill_num) AND (congress = i_congress) AND (i_member_id = member_id)
+  )
+  THEN
+    SELECT *
+    FROM Sponsor
+    WHERE (bill_num = i_bill_num) AND (congress = i_congress) AND (i_member_id = member_id);
+  ELSE
+    SELECT * FROM Sponsor WHERE false;
+  END IF;
+END; //
+
+DELIMITER ;
+
+DELIMITER //
+
+CREATE PROCEDURE IF NOT EXISTS InsertCosponsor
+(
+  IN i_member_id    VARCHAR(100),
+  IN i_bill_num     VARCHAR(15),
+  IN i_congress     VARCHAR(5)
+)
+BEGIN
+  INSERT INTO Cosponsor VALUES
+  (
+    i_member_id,
+    i_bill_num,
+    i_congress
+  );
+
+  IF EXISTS
+  (
+    SELECT *
+    FROM Cosponsor
+    WHERE (bill_num = i_bill_num) AND (congress = i_congress) AND (i_member_id = member_id)
+  )
+  THEN
+    SELECT *
+    FROM Cosponsor
+    WHERE (bill_num = i_bill_num) AND (congress = i_congress) AND (i_member_id = member_id);
+  ELSE
+    SELECT * FROM Cosponsor WHERE false;
+  END IF;
+END; //
+
+DELIMITER ;
+
+DELIMITER //
+
+CREATE PROCEDURE IF NOT EXISTS InsertVote
+(
+  IN i_member_id    VARCHAR(100),
+  IN i_bill_num     VARCHAR(15),
+  IN i_congress     VARCHAR(5),
+  IN i_position     VARCHAR(10)
+)
+BEGIN
+  INSERT INTO Vote VALUES
+  (
+    i_member_id,
+    i_bill_num,
+    i_congress,
+    i_position
+  );
+
+  IF EXISTS
+  (
+    SELECT *
+    FROM Vote
+    WHERE (bill_num = i_bill_num) AND (congress = i_congress) AND (i_member_id = member_id)
+  )
+  THEN
+    SELECT *
+    FROM Vote
+    WHERE (bill_num = i_bill_num) AND (congress = i_congress) AND (i_member_id = member_id);
+  ELSE
+    SELECT * FROM Vote WHERE false;
+  END IF;
 END; //
 
 DELIMITER ;

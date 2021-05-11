@@ -7,19 +7,24 @@ BEGIN
   IF billInfo = "Y" THEN
     WITH PartyBill AS
     (
-        SELECT bill_num, title, enacted, vetoed, congress, member_id, party
+        SELECT bill_num, title, enacted, vetoed, congress, member_id, party AS bill_party
         FROM (Bill JOIN Sponsor USING (bill_num, congress)) JOIN Role USING (member_id, congress)
         WHERE (bill_num = billN) AND (congress = cong)
     ),
     PartyVote AS
     (
-        SELECT bill_num, congress, chamber, party, position
+        SELECT chamber, party AS vote_party, position
         FROM (Bill JOIN Vote USING (bill_num, congress)) JOIN Role USING (member_id, congress)
-        WHERE (bill_num = billN) AND (congress = cong)
+        WHERE (bill_num = billN) AND (congress = cong) AND position = 'Yes'
+    ),
+    NonPartyCount AS
+    (
+      SELECT COUNT(position) AS crosses
+      FROM PartyBill JOIN PartyVote
+      WHERE (bill_party != vote_party AND position = 'Yes')
     )
-    SELECT firstName, middleName, lastName, title, enacted, vetoed, PartyBill.party as bill_party, COUNT(position) AS crosses
-    FROM (PartyBill JOIN PartyVote USING (bill_num, congress)) JOIN Member USING (member_id)
-    WHERE (PartyBill.party != PartyVote.party AND position = 'Yes');
+    SELECT firstName, middleName, lastName, title, enacted, vetoed, bill_party, crosses
+    FROM (PartyBill JOIN Member USING (member_id)) JOIN NonPartyCount;
   ELSE
 
     WITH PartyBill AS
