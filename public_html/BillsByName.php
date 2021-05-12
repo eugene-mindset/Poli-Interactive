@@ -51,7 +51,7 @@
 
         echo "<table><thead><tr>";
         // Create table headers
-        $columns = array('member_id', 'firstName', 'middleName', 'lastName', 'num_bills');
+        $columns = array('Member ID', 'First Name', 'Middle Name', 'Last Name', 'Number of Bills');
         foreach($columns as $column) {
             echo "<th>{$column}</th>";
         }
