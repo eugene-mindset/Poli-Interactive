@@ -123,7 +123,7 @@
   label.y = 10;
   label.horizontalCenter = "middle";
   label.verticalCenter = "top";
-  label.text = `${data['dUnity']}%  (${data['dAgree']} / ${data['dSize']}) \n Position: ${data['dPos']}`;
+  label.text = `${data['dUnity']*100}%  (${data['dAgree']} / ${data['dSize']}) \n Position: ${data['dPos']}`;
   label.textAlign = 'middle';
 
   var label = chart.radarContainer.createChild(am4core.Label);
@@ -167,7 +167,7 @@
   label.y = 10;
   label.horizontalCenter = "middle";
   label.verticalCenter = "top";
-  label.text = `${data['rUnity']}%  (${data['rAgree']} / ${data['rSize']}) \n Position: ${data['rPos']}`;
+  label.text = `${data['rUnity'] * 100}%  (${data['rAgree']} / ${data['rSize']}) \n Position: ${data['rPos']}`;
   label.textAlign = 'middle';
 
   var label = chart.radarContainer.createChild(am4core.Label);
