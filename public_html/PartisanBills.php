@@ -25,7 +25,7 @@
 
     echo "<table><thead><tr>";
 
-    $columns = array("Bill Number", "Congress", "Title", "Date Introduced", "ARrea");
+    $columns = array("Bill Number", "Congress", "Title", "Date Introduced", "Area");
     foreach($columns as $column) {
       echo "<th>{$column}</th>";
     }
