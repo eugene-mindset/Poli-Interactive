@@ -3,3 +3,6 @@ Anderson Adon, aadon1 | Eugene Asare, easare3
 In addition to making our `.html` files world readable, we have a `.css` file
 called `style.css` inside `public_html/` that must also be world readable to get
 it to work.
+
+The setup files have to be run from inside the `dbase_setup/` folder for the local
+paths to the files to work.
