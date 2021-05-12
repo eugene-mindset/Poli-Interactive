@@ -125,70 +125,70 @@ CREATE TABLE IF NOT EXISTS Vote (
             ON UPDATE NO ACTION
 );
 
-LOAD DATA LOCAL INFILE 'C:/Users/eugen/Documents/Poli-Interactive/db_csvs/congress-small.csv'
+LOAD DATA LOCAL INFILE './small_data/congress-small.csv'
 INTO TABLE Congress
 FIELDS
     TERMINATED BY '||'
     LINES TERMINATED BY '\n'
 IGNORE 1 ROWS (congress,startDate,endDate);
 
-LOAD DATA LOCAL INFILE 'C:/Users/eugen/Documents/Poli-Interactive/db_csvs/member-small.csv'
+LOAD DATA LOCAL INFILE './small_data/member-small.csv'
 INTO TABLE Member
 FIELDS
   TERMINATED BY '||'
   LINES TERMINATED BY '\n'
 IGNORE 1 ROWS (member_id,firstName,middleName,lastName,birthday,gender);
 
-LOAD DATA LOCAL INFILE 'C:/Users/eugen/Documents/Poli-Interactive/db_csvs/role-small.csv'
+LOAD DATA LOCAL INFILE './small_data/role-small.csv'
 INTO TABLE Role
 FIELDS
   TERMINATED BY '||'
   LINES TERMINATED BY '\n'
 IGNORE 1 ROWS (member_id,congress,chamber,party,state,district);
 
-LOAD DATA LOCAL INFILE 'C:/Users/eugen/Documents/Poli-Interactive/db_csvs/area-small.csv'
+LOAD DATA LOCAL INFILE './small_data/area-small.csv'
 INTO TABLE Area
 FIELDS
   TERMINATED BY '||'
   LINES TERMINATED BY '\n'
 IGNORE 1 ROWS (area);
 
-LOAD DATA LOCAL INFILE 'C:/Users/eugen/Documents/Poli-Interactive/db_csvs/bill-small.csv'
+LOAD DATA LOCAL INFILE './small_data/bill-small.csv'
 INTO TABLE Bill
 FIELDS
   TERMINATED BY '||'
   LINES TERMINATED BY '\n'
 IGNORE 1 ROWS (bill_num,congress,title,date_intro,area, enacted, vetoed);
 
-LOAD DATA LOCAL INFILE 'C:/Users/eugen/Documents/Poli-Interactive/db_csvs/subject-small.csv'
+LOAD DATA LOCAL INFILE './small_data/subject-small.csv'
 INTO TABLE Subject
 FIELDS
   TERMINATED BY '||'
   LINES TERMINATED BY '\n'
 IGNORE 1 ROWS (subject);
 
-LOAD DATA LOCAL INFILE 'C:/Users/eugen/Documents/Poli-Interactive/db_csvs/bill_subject-small.csv'
+LOAD DATA LOCAL INFILE './small_data/bill_subject-small.csv'
 INTO TABLE Bill_Subject
 FIELDS
   TERMINATED BY '||'
   LINES TERMINATED BY '\n'
 IGNORE 1 ROWS (bill_num,congress,subject);
 
-LOAD DATA LOCAL INFILE 'C:/Users/eugen/Documents/Poli-Interactive/db_csvs/sponsor-small.csv'
+LOAD DATA LOCAL INFILE './small_data/sponsor-small.csv'
 INTO TABLE Sponsor
 FIELDS
   TERMINATED BY '||'
   LINES TERMINATED BY '\n'
 IGNORE 1 ROWS (member_id,bill_num,congress);
 
-LOAD DATA LOCAL INFILE 'C:/Users/eugen/Documents/Poli-Interactive/db_csvs/cosponsor-small.csv'
+LOAD DATA LOCAL INFILE './small_data/cosponsor-small.csv'
 INTO TABLE Cosponsor
 FIELDS
   TERMINATED BY '||'
   LINES TERMINATED BY '\n'
 IGNORE 1 ROWS (member_id,bill_num,congress);
 
-LOAD DATA LOCAL INFILE 'C:/Users/eugen/Documents/Poli-Interactive/db_csvs/vote-small.csv'
+LOAD DATA LOCAL INFILE './small_data/vote-small.csv'
 INTO TABLE Vote
 FIELDS
     TERMINATED BY '||'
