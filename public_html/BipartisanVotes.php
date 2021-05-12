@@ -4,6 +4,7 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <div class="container">
   <?php
 
   include 'open.php';
@@ -118,4 +119,5 @@
   $stmt->close();
   $conn->close();
   ?>
+  </div>
 </body>
