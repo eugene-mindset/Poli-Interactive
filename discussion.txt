@@ -21,7 +21,10 @@ Subject, Area, and Bill_Subject tables.
 
 Our data since Phase C remained the same. We managed to provide visualizations
 that would allow a user to reasonably answer all the questions we proposed in
-Phase D, but did not use exactly the same queries.
+Phase D, but did not use exactly the same queries. We got rid of q14, which was
+"What senator has voted against the majority of their party the most times?", and
+instead with our visualizations you can answer the questions "what is the gender
+distribution of members of congress?"
 
 ## Process
 
