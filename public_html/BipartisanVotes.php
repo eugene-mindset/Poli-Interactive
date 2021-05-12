@@ -113,7 +113,7 @@
     }
     echo "</tbody></table>";
   } else {
-    echo "<br> No votes!";
+    echo "<br> No votes from opposite party!";
   }
 
   $stmt->close();
