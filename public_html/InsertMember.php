@@ -24,7 +24,10 @@
 
       //
       if (!$result) {
-        echo "<span class='err'>Call to InsertMember failed, entry might not be valid.</span>";
+        echo "<span class='err'>Call to insert failed. </span>";
+        echo $stmt->errno == 1452 ? "<span class='err'>Tuple fails insertion due to not passing constraints.<span class='err'>" : "<span class='err'>Tuple fails insertion due to having incorrect values<span class='err'>";
+        echo "<br><br>";
+
         $stmt->close();
         $conn->close();
         return;
