@@ -32,16 +32,9 @@
 
       // 
       if ($result->field_count > 1) {
-
         echo "<span class='suc'>Insert successful!</span>";
 
-        echo "<table><thead><tr>";
-        // Create table headers
-        foreach($columns as $column) {
-            echo "<th>{$column}</th>";
-        }
-
-        echo '</tr></thead><tbody>';
+        echo "<table><tbody>";
 
         // Loop through each row in result
         foreach($result as $row){

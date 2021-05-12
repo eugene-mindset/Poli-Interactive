@@ -1,6 +1,6 @@
 <!-- Anderson Adon, aadon1 | Eugene Asare, easare3 -->
 <head>
-  <title>Bill with most Senate Yes Votes</title>
+  <title>Bipartisan Support for a Bill</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -30,7 +30,7 @@
     $t = "S. J. Res.";
   }
 
-  echo "<h2>Party Unity for {$t} {$billNum} of {$congress}th Congress </h2>";
+  echo "<h2>Votes from Across the Aisle for {$t} {$billNum} of {$congress}th Congress </h2>";
 
   $bill = "{$billType}{$billNum}";
   $info = "Y";

@@ -1030,3 +1030,179 @@ BEGIN
 END; //
 
 DELIMITER ;
+
+
+DELIMITER //
+
+CREATE PROCEDURE IF NOT EXISTS DeleteMember
+(
+  IN i_member_id    VARCHAR(100)
+)
+BEGIN
+  IF EXISTS
+  (
+    SELECT *
+    FROM Member
+    WHERE member_id = i_member_id
+  )
+  THEN
+    DELETE FROM Member WHERE member_id = i_member_id;
+    SELECT *
+    FROM Member;
+  ELSE
+    SELECT err FROM Member WHERE false;
+  END IF;
+END; //
+
+DELIMITER ;
+
+
+DELIMITER //
+
+CREATE PROCEDURE IF NOT EXISTS DeleteRole
+(
+  IN i_member_id    VARCHAR(100),
+  IN i_congress     VARCHAR(5)
+)
+BEGIN
+  IF EXISTS
+  (
+    SELECT *
+    FROM Role
+    WHERE member_id = i_member_id AND congress = i_congress
+  )
+  THEN
+    DELETE FROM Role WHERE member_id = i_member_id AND congress = i_congress;
+
+    SELECT * FROM Role;
+  ELSE
+    SELECT err FROM Role WHERE false;
+  END IF;
+END; //
+
+DELIMITER ;
+
+
+DELIMITER //
+
+CREATE PROCEDURE IF NOT EXISTS DeleteBill
+(
+  IN i_bill_num    VARCHAR(15),
+  IN i_congress     VARCHAR(5)
+)
+BEGIN
+  IF EXISTS
+  (
+    SELECT *
+    FROM Bill
+    WHERE bill_num = i_bill_num AND congress = i_congress
+  )
+  THEN
+    DELETE FROM Bill WHERE bill_num = i_bill_num AND congress = i_congress;
+    SELECT * FROM Bill;
+  ELSE
+    SELECT err FROM Bill WHERE false;
+  END IF;
+END; //
+
+DELIMITER ;
+
+DELIMITER //
+
+CREATE PROCEDURE IF NOT EXISTS DeleteBillSubject
+(
+  IN i_bill_num    VARCHAR(15),
+  IN i_congress     VARCHAR(5),
+  IN i_subject      VARCHAR(100)
+)
+BEGIN
+  IF EXISTS
+  (
+    SELECT *
+    FROM Bill_Subject
+    WHERE bill_num = i_bill_num AND congress = i_congress AND subject = i_subject
+  )
+  THEN
+    DELETE FROM Bill_Subject WHERE bill_num = i_bill_num AND congress = i_congress AND subject = i_subject;
+    SELECT * FROM Bill_Subject WHERE bill_num = i_bill_num AND congress = i_congress;
+  ELSE
+    SELECT err FROM Bill_Subject WHERE false;
+  END IF;
+END; //
+
+DELIMITER ;
+
+DELIMITER //
+
+CREATE PROCEDURE IF NOT EXISTS DeleteSponsor
+(
+  IN i_bill_num    VARCHAR(15),
+  IN i_congress     VARCHAR(5)
+)
+BEGIN
+  IF EXISTS
+  (
+    SELECT *
+    FROM Sponsor
+    WHERE bill_num = i_bill_num AND congress = i_congress
+  )
+  THEN
+    DELETE FROM Sponsor WHERE bill_num = i_bill_num AND congress = i_congress;
+    SELECT * FROM Sponsor;
+  ELSE
+    SELECT err FROM Sponsor WHERE false;
+  END IF;
+END; //
+
+DELIMITER ;
+
+DELIMITER //
+
+CREATE PROCEDURE IF NOT EXISTS DeleteCosponsor
+(
+  IN i_member_id    VARCHAR(100),
+  IN i_bill_num    VARCHAR(15),
+  IN i_congress     VARCHAR(5)
+)
+BEGIN
+  IF EXISTS
+  (
+    SELECT *
+    FROM Cosponsor
+    WHERE bill_num = i_bill_num AND congress = i_congress AND member_id = i_member_id
+  )
+  THEN
+    DELETE FROM Cosponsor WHERE bill_num = i_bill_num AND congress = i_congress AND member_id = i_member_id;
+    SELECT * FROM Cosponsor WHERE bill_num = i_bill_num AND congress = i_congress;
+  ELSE
+    SELECT err FROM Cosponsor WHERE false;
+  END IF;
+END; //
+
+DELIMITER ;
+
+DELIMITER //
+
+CREATE PROCEDURE IF NOT EXISTS DeleteVote
+(
+  IN i_member_id    VARCHAR(100),
+  IN i_bill_num    VARCHAR(15),
+  IN i_congress     VARCHAR(5)
+)
+BEGIN
+  IF EXISTS
+  (
+    SELECT *
+    FROM Vote
+    WHERE bill_num = i_bill_num AND congress = i_congress AND member_id = i_member_id
+  )
+  THEN
+    DELETE FROM Vote WHERE bill_num = i_bill_num AND congress = i_congress AND member_id = i_member_id;
+    SELECT * FROM Vote WHERE bill_num = i_bill_num AND congress = i_congress;
+  ELSE
+    SELECT err FROM Vote WHERE false;
+  END IF;
+END; //
+
+DELIMITER ;
+

@@ -1,6 +1,6 @@
 <!-- Anderson Adon, aadon1 | Eugene Asare, easare3 -->
 <head>
-  <title>Insert Role</title>
+  <title>Delete Role</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -9,30 +9,27 @@
       // Open a connection to dbase server
       include 'open.php';
 
-      $memberID = $_POST['member_id'];
-      $congress = $_POST['congress'];
-      $party = $_POST['party'];
-      $chamber = $_POST['chamber'];
-      $state = $_POST['state'];
-      $district = $_POST['district'];
 
-      $stmt = $conn->prepare("CALL InsertRole(?,?,?,?,?,?)");
-      $stmt->bind_param('ssssss', $memberID, $congress, $chamber, $party, $state, $district);
+      $memberID = $_POST['member_id'];
+      $cong = $_POST['congress'];
+
+      $stmt = $conn->prepare("CALL DeleteRole(?,?)");
+      $stmt->bind_param('ss', $memberID, $cong);
       $stmt->execute();
       $result = $stmt->get_result();
 
       //
       if (!$result) {
-        echo "<span class='err'>Call to InsertRole failed, entry might not be valid.</span>";
+        echo "<span class='err'>Call to DeleteRole failed, entry does not exist.</span>";
         $stmt->close();
         $conn->close();
         return;
       }
 
-      // 
+      //
       if ($result->field_count > 1) {
 
-        echo "<span class='suc'>Insert successful!</span>";
+        echo "<span class='suc'>Delete successful!</span>";
 
         echo "<table><thead><tr>";
         // Create table headers
@@ -53,7 +50,7 @@
         }
         echo "</tbody></table>";
       } else {
-        echo "<span class='err'>Entry is not valid!</span>";
+        echo "<span class='err'>Entry is already removed!</span>";
       }
 
       $stmt->close();

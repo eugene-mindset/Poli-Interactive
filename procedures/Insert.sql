@@ -1,36 +1,26 @@
 
 DELIMITER //
 
-DROP PROCEDURE IF EXISTS InsertVote //
+DROP PROCEDURE IF EXISTS DeleteVote //
 
-CREATE PROCEDURE IF NOT EXISTS InsertVote
+CREATE PROCEDURE IF NOT EXISTS DeleteVote
 (
   IN i_member_id    VARCHAR(100),
-  IN i_bill_num     VARCHAR(15),
-  IN i_congress     VARCHAR(5),
-  IN i_position     VARCHAR(10)
+  IN i_bill_num    VARCHAR(15),
+  IN i_congress     VARCHAR(5)
 )
 BEGIN
-  INSERT INTO Vote VALUES
-  (
-    i_member_id,
-    i_bill_num,
-    i_congress,
-    i_position
-  );
-
   IF EXISTS
   (
     SELECT *
     FROM Vote
-    WHERE (bill_num = i_bill_num) AND (congress = i_congress) AND (i_member_id = member_id)
+    WHERE bill_num = i_bill_num AND congress = i_congress AND member_id = i_member_id
   )
   THEN
-    SELECT *
-    FROM Vote
-    WHERE (bill_num = i_bill_num) AND (congress = i_congress) AND (i_member_id = member_id);
+    DELETE FROM Vote WHERE bill_num = i_bill_num AND congress = i_congress AND member_id = i_member_id;
+    SELECT * FROM Vote WHERE bill_num = i_bill_num AND congress = i_congress;
   ELSE
-    SELECT * FROM Vote WHERE false;
+    SELECT err FROM Vote WHERE false;
   END IF;
 END; //
 
