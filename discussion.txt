@@ -61,6 +61,12 @@ term. For those districts, during the term that the changed occured, there would
 be two congress members listed. We managed to find a way to handle this but simply
 getting the first person, but this could have been modeled better.
 
+Every bill has to have a sponsor, but since we made Sponsor a separate table from
+Bill and not an attribute of Bill, there was no way for us to enforce this. If
+you delete the sponsor for a Bill, the visualization "See how many votes on bill
+came from the opposite party of the sponsor" won't work, since there is no way
+to determine the party of the sponsor since there is no sponsor.
+
 ## Extensions
 
 If we had more time, we would try to gather more data about Congress. There is a
